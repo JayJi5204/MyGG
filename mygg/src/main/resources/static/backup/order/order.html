@@ -1,109 +1,84 @@
-
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Coffee Order List</title>
+    <title>Order List</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <link rel="stylesheet" type="text/css" href="/css/comm.css">
-    <link rel="stylesheet" type="text/css" href="/css/coffee.css">
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
 <!-- 헤더 위치 -->
-<div class="topnav">
-    <a href="/home/home.html">Home</a>
-    <a href="/menu/menu.html">커피메뉴</a>
-    <a href="/order/order.html">주문내역</a>
-    <a href="/member/member.html">고객정보</a>
-</div>
-
+<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
 
 <div id="main" style="font-size:large; text-align: center; ">
 
-    <div id="search" style="height: 150px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
-        <h3>[ Coffee Order List <span style="font-size:30px;">&#128722;</span> ]</h3>
+    <div id="search"
+         style="height: 150px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
+        <h3>[ Order List <span style="font-size:30px;">&#129534;</span> ]</h3>
 
-        <form name="fm_order" autocomplete="on">
+        <form action="/order_search" autocomplete="on" method="post" name="fm_order">
             <fieldset>
-                <legend> [검색조건] </legend>
-                <label>등록기간</label><input type="date" id="start_date" name="start_date" min="2020-01-01" max="2023-12-31">
-                - <input type="date" id="end_date" name="end_date" min="2020-01-01" max="2023-12-31">
+                <legend> [검색조건]</legend>
+                <label>등록기간</label><input id="start_date" max="2030-12-31" min="2020-01-01" name="start_date"
+                                          type="date">
+                - <input id="end_date" max="2030-12-31" min="2020-01-01" name="end_date" type="date">
                 &nbsp;&nbsp;
-                <label>메뉴명</label> <input type="text" id="menu" name="menu">
+                <label>메뉴명</label> <input id="item" name="item" type="text">
                 &nbsp;&nbsp;
-                <label>고객명</label> <input type="text" id="name" name="name">
-
-            </select>
-
-                &nbsp;&nbsp;<input type="submit" value="조회" style="width: 80px;height: 30px;font-weight: bold; font-size: medium">
-
+                <label>고객명</label> <input id="name" name="name" type="text">
+                </select>
+                &nbsp;&nbsp;<input style="width: 80px;height: 30px;font-weight: bold; font-size: medium" type="submit"
+                                   value="조회">
                 <!-- <a href="javascript:loadDocArray()">test</a> -->
                 <!--        <label>CheckBox : </label><span id="idCheckBox"></span>-->
             </fieldset>
-
         </form>
-
-
     </div>
-
 
     <table class="table">
         <thead>
         <tr class="tr_td">
-            <th>Chk</th>
             <th>주문번호</th>
             <th>커피No</th>
             <th>메뉴명</th>
+            <th>가격</th>
             <th>고객ID</th>
             <th>고객명</th>
             <th>주문일자</th>
         </tr>
         </thead>
 
-
-        <tbody id="t_body">
+        <tbody id="t_body" >
         <!--- 데이타 출력 부분 -->
-        <tr class="tr_td">
-            <td>Chk</td>
-            <th>주문번호</th>
-            <td>커피No</td>
-            <td>메뉴명</td>
-            <td>고객ID</td>
-            <td>고객명</td>
-            <td>주문일자</td>
-        </tr>
-
-        <tr class="tr_td">
-            <td>Chk</td>
-            <th>주문번호</th>
-            <td>커피No</td>
-            <td>메뉴명</td>
-            <td>고객ID</td>
-            <td>고객명</td>
-            <td>주문일자</td>
-        </tr>
-
-        <tr class="tr_td">
-            <td>Chk</td>
-            <th>주문번호</th>
-            <td>커피No</td>
-            <td>메뉴명</td>
-            <td>고객ID</td>
-            <td>고객명</td>
-            <td>주문일자</td>
+        <tr class="tr_td" th:each="list : ${list}">
+            <th th:text="${list.getNo()}">주문번호</th>
+            <td th:text="${list.getItem_no()}">커피No</td>
+            <td th:text="${list.getItem()}">메뉴명</td>
+            <td th:text="${#numbers.formatInteger(list.getPrice(),0,'COMMA')}">가격</td>
+            <td th:text="${list.getMember_id()}">고객ID</td>
+            <td th:text="${list.getName()}">고객명</td>
+            <td th:text="${list.getReg_day()}">등록일</td>
         </tr>
         </tbody>
     </table>
 </div>
 
 <!-- 푸터 위치 -->
-<div class="footer">
-    <!--    https://www.w3schools.com/html/html_emojis.asp   -->
-    <h4>[Footer] <span style="font-size:30px;">&#9973;</span> Spring boot 항해 ~ with Me</h4>
-</div>
+<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
+
+
+<script>
+    const startNow = new Date();
+    const endNow = new Date();
+    const startTime = new Date(startNow.setDate(startNow.getDate() - 30));
+    const endTime = new Date(endNow.setHours(endNow.getHours() + 9));
+    document.getElementById("start_date").value= startTime.toISOString().slice(0,10);
+    document.getElementById("end_date").value= endTime.toISOString().slice(0,10);
+</script>
 
 </body>
 </html>

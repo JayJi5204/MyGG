@@ -6,13 +6,13 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <link href="/css/comm.css" rel="stylesheet" type="text/css">
-    <link href="/css/item.css" rel="stylesheet" type="text/css">
+    <link href="/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
 <!-- 헤더 위치 -->
-<th:block th:replace="~{/v2/comm/header :: headerFragment}"></th:block>
+<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
 
 <div id="main" style="font-size:large; text-align: center; ">
 
@@ -22,14 +22,14 @@
             <th:block th:text="${hello}"></th:block>
         </h3>
 
-        <form action="/v2/item_search" autocomplete="on" method="post" name="fm_item">
+        <form action="/boardSearch" autocomplete="on" method="post" name="fm_board">
             <fieldset>
                 <legend> [검색조건]</legend>
                 <label>등록기간</label><input id="start_date" max="2030-12-31" min="2020-01-01" name="start_date"
                                           type="date">
                 - <input id="end_date" max="2030-12-31" min="2020-01-01" name="end_date" type="date">
                 &nbsp;&nbsp;
-                <label>메뉴명</label> <input id="item" name="item" type="text">
+                <label>메뉴명</label> <input id="board" name="board" type="text">
                 &nbsp;&nbsp;
                 <label>종류</label> <select id="kind" name="kind">
                 <option value="ALL">전체</option>
@@ -41,7 +41,7 @@
                 &nbsp;&nbsp;<input style="width: 80px;height: 30px;font-weight: bold; font-size: medium" type="submit"
                                    value="조회">
                 &nbsp;&nbsp;<button style="width: 80px;height: 30px;font-weight: bold; font-size: medium"><a
-                    href="/v2/item_insert">등록</a></button>
+                    href="/boardInsert">등록</a></button>
                 &nbsp;&nbsp;<button id="IdUpdateAll" onclick="onModify()"
                                     style="width: 80px;height: 30px;font-weight: bold; font-size: medium"
                                     type="button">가격수정
@@ -52,7 +52,7 @@
         </form>
     </div>
 
-    <form action="/v2/updatePrice" id="IdFormTable" method="post" name="formTable">
+    <form action="/updatePrice" id="IdFormTable" method="post" name="formTable">
         <table class="table">
             <thead>
             <tr class="tr_td">
@@ -77,8 +77,8 @@
                 <td th:text="${#numbers.formatInteger(list.getPrice(),0,'COMMA')}">가격</td>
                 <td th:text="${list.getReg_day()}">등록일</td>
                 <td th:text="${list.getMod_day()}">수정일</td>
-                <td><a th:href="@{/v2/item_update(no=${list.getNo()})}">수정</a></td>
-                <td><a th:href="@{/v2/item_delete(no=${list.getNo()})}">삭제</a></td>
+                <td><a th:href="@{/board_update(no=${list.getNo()})}">수정</a></td>
+                <td><a th:href="@{/board_delete(no=${list.getNo()})}">삭제</a></td>
             </tr>
             </tbody>
         </table>
@@ -86,7 +86,7 @@
     </form>
 </div>
 <!--푸터위치-->
-<th:block th:replace="~{/v2/comm/footer :: footerFragment}"></th:block>
+<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
 
 
 <script>

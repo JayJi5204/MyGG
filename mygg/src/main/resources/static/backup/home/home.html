@@ -1,56 +1,50 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Coffee _ Home</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
-  <link rel="stylesheet" type="text/css" href="/css/comm.css">
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
 <!-- 헤더 위치 -->
-<div class="topnav">
-  <a href="/home/home.html">Home</a>
-  <a href="/menu/menu.html">커피메뉴</a>
-  <a href="/order/order.html">주문내역</a>
-  <a href="/member/member.html">고객정보</a>
-</div>
-
+<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
 
 <div id="main" style="font-size:large; alignment: center; padding: 10px 50px ">
-  <table>
-    <tr>
-      <td style="width:450px">
-      <p>따라하며 배우는 Spring boot with IT 늦공 김부장<p>
-        우리 같이 Spring boot 항해를 같이해요. <p>
-        제가 이 배의 선장이 되어 볼게요.
-      </p>
-      <p>
-        <hr>
-      <ul style="list-style-type:square;">
-        <li>개발툴 : 인텔리J</li>
-        <li>Java 버전 : 1.8</li>
-        <li>View  : 타임리프</li>
-        <li>DBMS : MaridDB</li>
-        <li>Mapper : 마이바티스</li>
-      </ul>
-      </p>
-      </td>
-      <td style="width:auto">
-        <img src="/img/Ship.PNG" style="width: 700px">
-      </td>
-    </tr>
-  </table>
+    <table>
+        <tr>
+            <td style="width:700px">
+                <div style="margin-left: -25px;">
+                    <ul style="list-style-type:none;">
+                        <li>프로젝트 소개 : 내전 기록 보관소</li>
+                        <li>진행기간 : 2024.10.18 ~</li>
+                        <li>프로젝트 목적 : 백엔드 로직과 보안을 구현하고, 실시간 데이터 처리와 고성능 시스템, 안정적인 배포환경을 구축하는 프로젝트</li>
+                    </ul>
+                </div>
+                <hr>
+                <div>
+                    <ul>
+                        <li>Frameworks : Spring Boot, Spring Security</li>
+                        <li>Database : PostgreSQL, Redis</li>
+                        <li>Data Access : MyBatis</li>
+                        <li>Messaging : Kafka</li>
+                        <li>DevOps : Docker, AWS</li>
+                    </ul>
+                </div>
+            </td>
+            <td style="width:auto">
+                <img src="/img/Home.png" style="width: 550px; height: 300px;">
+            </td>
+        </tr>
+    </table>
 </div>
-
 
 <!-- 푸터 위치 -->
-<div class="footer">
-  <!--    https://www.w3schools.com/html/html_emojis.asp   -->
-  <h4>[Footer] <span style="font-size:30px;">&#9973;</span> Spring boot 항해 ~ with Me</h4>
-</div>
+<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
+
 
 </body>
 </html>
