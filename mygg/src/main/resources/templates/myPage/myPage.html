@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member List</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
+
+<div id="main" style="font-size:large; text-align: center; ">
+
+    <div id="search"
+         style="height: 150px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
+        <h3>[ Member Info <span style="font-size:30px;">&#128699;</span> ]</h3>
+
+        <form action="/member_search" autocomplete="on" method="post" name="fm_member">
+            <fieldset>
+                <legend> [검색조건]</legend>
+                <label>등록기간</label><input id="start_date" max="2030-12-31" min="2020-01-01" name="start_date"
+                                          type="date">
+                - <input id="end_date" max="2030-12-31" min="2020-01-01" name="end_date" type="date">
+                &nbsp;&nbsp
+                <label>고객명</label> <input id="name" name="name" type="text">
+                &nbsp;&nbsp;<input style="width: 80px;height: 30px;font-weight: bold; font-size: medium" type="submit"
+                                   value="조회">
+            </fieldset>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr class="tr_td">
+            <th>참여횟수</th>
+            <th>승리 횟수</th>
+            <th>패배 횟수</th>
+            <th>전체 승률</th>
+            <th>POG</th>
+        </tr>
+        </thead>
+        <tbody id="t_body1">
+        <tr class="tr_td" th:each="list : ${list}">
+            <th th:text="${list.getMember_id()}">참여횟수</th>
+            <td th:text="${list.getName()}">승리 횟수</td>
+            <td th:text="${list.getEmail()}">패배 횟수</td>
+            <td th:text="${list.getRole()}">전체 승률</td>
+            <td th:text="${list.getReg_day()}">POG</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+        <tr class="tr_td">
+            <th>총 킬</th>
+            <th>총 데스</th>
+            <th>총 어시스트</th>
+            <th>Elo</th>
+            <th>벌점</th>
+        </tr>
+        </thead>
+        <tbody id="t_body2">
+        <tr class="tr_td" th:each="list : ${list}">
+            <th th:text="${list.getMember_id()}">총 킬</th>
+            <td th:text="${list.getName()}">총 데스</td>
+            <td th:text="${list.getEmail()}">총 어시스트</td>
+            <td th:text="${list.getRole()}">Elo</td>
+            <td th:text="${list.getReg_day()}">벌점</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+        <tr class="tr_td">
+            <th>탑 픽률</th>
+            <th>정글 픽률</th>
+            <th>미드 픽률</th>
+            <th>원딜 픽률</th>
+            <th>서폿 픽률</th>
+
+        </tr>
+        </thead>
+        <tbody id="t_body3">
+        <tr class="tr_td" th:each="list : ${list}">
+            <th th:text="${list.getMember_id()}">탑 픽률</th>
+            <td th:text="${list.getName()}">정글 픽률</td>
+            <td th:text="${list.getEmail()}">미드 픽률</td>
+            <td th:text="${list.getRole()}">원딜 픽률</td>
+            <td th:text="${list.getReg_day()}">서폿 픽률</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+        <tr class="tr_td">
+            <th>탑 승률</th>
+            <th>정글 승률</th>
+            <th>미드 승률</th>
+            <th>원딜 승률</th>
+            <th>서폿 승률</th>
+        </tr>
+        </thead>
+        <tbody id="t_body4">
+        <tr class="tr_td" th:each="list : ${list}">
+            <th th:text="${list.getMember_id()}">탑 승률</th>
+            <td th:text="${list.getName()}">정글 승률</td>
+            <td th:text="${list.getEmail()}">미드 승률</td>
+            <td th:text="${list.getRole()}">원딜 승률</td>
+            <td th:text="${list.getReg_day()}">서폿 승률</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+        <tr class="tr_td">
+            <th>챔피언</th>
+            <th>라인</th>
+            <th>킬</th>
+            <th>데스</th>
+            <th>어시스트</th>
+            <th>KDA</th>
+            <th>승</th>
+            <th>패</th>
+            <th>승률</th>
+        </tr>
+        </thead>
+
+        <tbody id="t_body5">
+        <tr class="tr_td" th:each="list : ${list}">
+            <th th:text="${list.getMember_id()}">챔피언</th>
+            <td th:text="${list.getName()}">라인</td>
+            <td th:text="${list.getEmail()}">킬</td>
+            <td th:text="${list.getRole()}">데스</td>
+            <td th:text="${list.getReg_day()}">어시스트</td>
+            <td th:text="${list.getReg_day()}">KDA</td>
+            <td th:text="${list.getReg_day()}">승</td>
+            <td th:text="${list.getReg_day()}">패</td>
+            <td th:text="${list.getReg_day()}">승률</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 푸터 위치 -->
+<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
+<script>
+    const startNow = new Date();
+    const endNow = new Date();
+    const startTime = new Date(startNow.setDate(startNow.getDate() - 30));
+    const endTime = new Date(endNow.setHours(endNow.getHours() + 9));
+    document.getElementById("start_date").value= startTime.toISOString().slice(0,10);
+    document.getElementById("end_date").value= endTime.toISOString().slice(0,10);
+</script>
+
+</body>
+</html>
+
+
