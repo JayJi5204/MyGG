@@ -25,17 +25,11 @@ public class MemberEntity {
 
     private String name;
 
-
     private String password;
 
     private String nickName;
 
-    private int Elo;
-
     private int penalty;
-
-    @Enumerated(EnumType.STRING)
-    private Line line;
 
     @Enumerated(EnumType.STRING)
     private Tier tier;

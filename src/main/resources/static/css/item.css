@@ -1,20 +1,7 @@
-table {
-    width: 90%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-tr,th,td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-}
+.fieldError {
+        border-color: #bd2130;
+    }
 
-tbody {font-size: small}
-
-tr:hover {background-color: #D6EEEE;}
-
-label{
-    padding: 10px;
+.error{
+        color:red;
 }

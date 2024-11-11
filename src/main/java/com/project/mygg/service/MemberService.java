@@ -1,6 +1,7 @@
 package com.project.mygg.service;
 
 import com.project.mygg.DTO.MemberRequestDTO;
+import com.project.mygg.DTO.MemberResponseDTO;
 import com.project.mygg.entity.MemberEntity;
 import com.project.mygg.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,12 +36,23 @@ public class MemberService {
     }
 
     //회원 전체 조회
-    public List<MemberEntity> findMembers() {
-        return memberRepository.findAll();
+//    public List<MemberEntity> findMembers() {
+//        return memberRepository.findAll();
+//    }
+
+    public List<MemberResponseDTO> findMembers() {
+        List<MemberEntity> members = memberRepository.findAll();
+        return members.stream()
+                .map(MemberResponseDTO::new)
+                .collect(Collectors.toList());
     }
 
-    public Optional<MemberEntity> findOne(Long memberId) {
-        return memberRepository.findById(memberId);
-    }
 
+//    public Optional<MemberEntity> findOne(Long memberId) {
+//        return memberRepository.findById(memberId);
+//    }
+
+    public Optional<MemberResponseDTO> findOne(Long memberId){
+        return memberRepository.findById(memberId).map(MemberResponseDTO::new);
+    }
 }

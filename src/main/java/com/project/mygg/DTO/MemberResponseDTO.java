@@ -1,26 +1,27 @@
 package com.project.mygg.DTO;
 
 import com.project.mygg.entity.MemberEntity;
-import jakarta.validation.constraints.NotEmpty;
+import com.project.mygg.enums.Role;
+import com.project.mygg.enums.Tier;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-class MemberResponseDTO {
+public class MemberResponseDTO {
     private Long id;
     private String name;
-    private String password;
     private String nickName;
-    private int Elo;
     private int penalty;
+    private Tier tier;
+    private Role role;
 
     public MemberResponseDTO(MemberEntity memberEntity) {
         this.id = memberEntity.getId();
         this.name = memberEntity.getName();
-        this.password = memberEntity.getPassword();
         this.nickName = memberEntity.getNickName();
-        this.Elo = memberEntity.getElo();
         this.penalty = memberEntity.getPenalty();
+        this.tier = Tier.UNRANKED;
+        this.role = Role.MEMBER;
     }
 }

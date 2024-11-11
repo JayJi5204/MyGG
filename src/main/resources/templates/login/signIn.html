@@ -1,46 +1,41 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>로그인</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" type="text/css" href="/css/comm.css">
-    <link rel="stylesheet" type="text/css" href="/css/item.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-
 <!-- 헤더 위치 -->
-<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
 
-<h3 style="text-align:center;">[ 고객명 <span style="font-size:30px;">&#128378;</span> ]
-    <span style="color: red"><th:block th:text="${message}"></th:block></span></h3>
-<p></p>
-
-<form name="login" th:object="${member}" autocomplete="on" action="/login" method="post">
-    <fieldset style="text-align:center; width: 500px; margin: auto ">
-        <legend style="font-size: large; " >[로그인]</legend>
-
-        <div id="LoginForm" style="font-size:medium; font-weight: bold; text-align: center;">
-            <div style="height: 40px">
-                <label>ID &nbsp; : </label>
-                <input type="text" th:field="*{name}" class="name" name="id" placeholder="아이디를 입력해 주세요."
-                       th:class="${#fields.hasErrors('name')}? 'fieldError':'name'">
-                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
-            </div>
-            <div>
-                <label>PW : </label>
-                <input type="text" th:field="*{password}" class="password" name="id" placeholder="비밀번호를 입력해 주세요."
-                       th:class="${#fields.hasErrors('name')}? 'fieldError':'password'">
-            </div>
-            <p></p>
-            <input type="submit" value="LogIn" style="width: 300px;height: 30px;font-weight: bold; font-size: medium">
+<body>
+<div class="container">
+    <h2 class="mt-5">로그인</h2>
+    <form action="/singIn" class="mt-3" method="post" role="form">
+        <div class="form-group">
+            <label for="name">아이디</label>
+            <input class="form-control" id="name" placeholder="아이디를 입력하세요"
+                   type="text">
         </div>
-    </fieldset>
-</form>
-<!--푸터위치-->
-<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input class="form-control" type="password" id="password" placeholder="패스워드를 입력하세요">
+        </div>
 
+        <button class="btn btn-primary" type="submit">로그인</button>
+        <a class="btn btn-light" role="button" th:href="@{/signUp}">회원가입</a>
+    </form>
+    <div class="alert alert-danger mt-3" th:if="${param.error}">
+        로그인에 실패했습니다. 다시 시도해 주세요.
+    </div>
+</div>
+<!--푸터위치-->
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

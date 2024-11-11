@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-
-    <link href="/css/comm.css" rel="stylesheet" type="text/css">
-
+    <meta charset="UTF-8">
+    <title>MyGG</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-
 <!-- 헤더 위치 -->
-<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
-
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
+<body>
 <div id="main" style="font-size:large; alignment: center; padding: 10px 50px ">
     <table>
         <tr>
@@ -42,11 +38,14 @@
     </table>
 </div>
 
-<!-- 푸터 위치 -->
-<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
-
-
 </body>
+<!--푸터위치-->
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </html>
 
 
