@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>board board</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/css/comm.css">
+    <link rel="stylesheet" type="text/css" href="/css/board.css">
+
+</head>
+<body>
+
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
+
+<div id="main" style="font-size:large; text-align: center; ">
+
+    <div id="search" style="height: 300px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
+        <h3>[ 상품 수정 <span style="font-size:30px;">&#9749;</span> ] <th:block th:text="${hello}"></th:block>  </h3>
+
+        <form name="fm_board_ins" autocomplete="on" action="/boardUpdate" method="post">
+            <fieldset>
+
+                <legend> [커피 메뉴 등록] </legend>
+                <label>메뉴명</label> <input type="text" id="name" name="board" th:value="${map.get('board')}"></p>
+                <label>종 류 </label><select name="kind">
+                <option value="의류" th:selected="${map.get('kind')} == '의류'">의류</option>
+                <option value="식품" th:selected="${map.get('kind')} == '식품'">식품</option>
+                <option value="전자기기" th:selected="${map.get('kind')} == '전자기기'">전자기기</option>
+            </select>
+                </p>
+                &nbsp;&nbsp;
+                <label>가 격 </label><input type="number" name="price" th:value="${map.get('price')}"></p>
+                <input type="hidden" name="no" th:value="${map.get('no')}">
+
+                <input type="submit" value="메뉴 등록" style="width: 100px;height: 30px;font-weight: bold; font-size: medium">
+            </fieldset>
+        </form>
+
+
+    </div>
+
+</div>
+
+<!-- 푸터 위치 -->
+<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
+
+
+</body>
+</html>
+
+

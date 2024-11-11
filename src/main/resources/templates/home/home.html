@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
+
+<div id="main" style="font-size:large; alignment: center; padding: 10px 50px ">
+    <table>
+        <tr>
+            <td style="width:700px">
+                <div style="margin-left: -25px;">
+                    <ul style="list-style-type:none;">
+                        <li>프로젝트 소개 : 내전 기록 보관소</li>
+                        <li>진행기간 : 2024.10.18 ~</li>
+                        <li>프로젝트 목적 : 백엔드 로직과 보안을 구현하고, 실시간 데이터 처리와 고성능 시스템, 안정적인 배포환경을 구축하는 프로젝트</li>
+                    </ul>
+                </div>
+                <hr>
+                <div>
+                    <ul>
+                        <li>Frameworks : Spring Boot, Spring Security</li>
+                        <li>Database : PostgreSQL, Redis</li>
+                        <li>Data Access : MyBatis</li>
+                        <li>Messaging : Kafka</li>
+                        <li>DevOps : Docker, AWS</li>
+                    </ul>
+                </div>
+            </td>
+            <td style="width:auto">
+                <img src="/img/Home.png" style="width: 550px; height: 300px;">
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- 푸터 위치 -->
+<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
+
+
+</body>
+</html>
+
+

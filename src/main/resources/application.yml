@@ -1,0 +1,30 @@
+# Configuration Port
+server:
+  port: 8081
+
+# Configuration Thymeleaf
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+    cache: false
+
+  # Configuration Devtools
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enable: false
+
+  # Configuration PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mygg
+    username: orderuser
+    password: 1234
