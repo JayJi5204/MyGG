@@ -2,10 +2,11 @@ package com.project.mygg.entity;
 
 import com.project.mygg.enums.Line;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Entity
+@Table(name = "champion_entity")
 public class ChampionStatsEntity {
 
     @Id
@@ -15,15 +16,15 @@ public class ChampionStatsEntity {
 
     private String championName;
 
-    private int win;
+    private final int win;
 
-    private int lose;
+    private final int lose;
 
-    private int kill;
+    private final int kill;
 
-    private int death;
+    private final int death;
 
-    private int assist;
+    private final int assist;
 
     @Enumerated(EnumType.STRING)
     private Line line;
@@ -41,11 +42,13 @@ public class ChampionStatsEntity {
     }
 
     public int getKill(ChampionStatsEntity championStatsEntity) {
-      return championStatsEntity.getKill();
+        return championStatsEntity.getKill();
     }
+
     public int getDeath(ChampionStatsEntity championStatsEntity) {
         return championStatsEntity.getDeath();
     }
+
     public int getAssist(ChampionStatsEntity championStatsEntity) {
         return championStatsEntity.getAssist();
     }

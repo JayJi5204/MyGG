@@ -1,29 +1,33 @@
 package com.project.mygg.entity;
 
+import com.project.mygg.DTO.MemberRequestDTO;
 import com.project.mygg.enums.Line;
 import com.project.mygg.enums.Role;
 import com.project.mygg.enums.Tier;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
 @Entity
+@Table(name = "member_entity")
+@NoArgsConstructor
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+
     private String password;
 
-    @Column(nullable = false)
     private String nickName;
 
     private int Elo;
@@ -49,4 +53,10 @@ public class MemberEntity {
 //    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
 //    private List<ReplyEntity> replyEntity = new ArrayList<>();
 
+
+    public MemberEntity(MemberRequestDTO memberRequestDTO) {
+        this.name = memberRequestDTO.getName();
+        this.password = memberRequestDTO.getPassword();
+        this.nickName = memberRequestDTO.getNickName();
+    }
 }

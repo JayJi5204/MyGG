@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MyPageController {
     @GetMapping("/myPage")
     public String myPage(){
-        return "/myPage";
+        return "/myPage/myPage";
     }
 }

@@ -4,6 +4,14 @@ server:
 
 # Configuration Thymeleaf
 spring:
+
+  # Configuration PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mygg
+    username: orderuser
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: create
@@ -23,8 +31,3 @@ spring:
     restart:
       enable: false
 
-  # Configuration PostgreSQL
-  datasource:
-    url: jdbc:postgresql://localhost:5432/mygg
-    username: orderuser
-    password: 1234

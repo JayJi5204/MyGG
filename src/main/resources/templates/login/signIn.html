@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>로그인</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/css/comm.css">
+    <link rel="stylesheet" type="text/css" href="/css/item.css">
+</head>
+<body>
+
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
+
+<h3 style="text-align:center;">[ 고객명 <span style="font-size:30px;">&#128378;</span> ]
+    <span style="color: red"><th:block th:text="${message}"></th:block></span></h3>
+<p></p>
+
+<form name="login" th:object="${member}" autocomplete="on" action="/login" method="post">
+    <fieldset style="text-align:center; width: 500px; margin: auto ">
+        <legend style="font-size: large; " >[로그인]</legend>
+
+        <div id="LoginForm" style="font-size:medium; font-weight: bold; text-align: center;">
+            <div style="height: 40px">
+                <label>ID &nbsp; : </label>
+                <input type="text" th:field="*{name}" class="name" name="id" placeholder="아이디를 입력해 주세요."
+                       th:class="${#fields.hasErrors('name')}? 'fieldError':'name'">
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+            </div>
+            <div>
+                <label>PW : </label>
+                <input type="text" th:field="*{password}" class="password" name="id" placeholder="비밀번호를 입력해 주세요."
+                       th:class="${#fields.hasErrors('name')}? 'fieldError':'password'">
+            </div>
+            <p></p>
+            <input type="submit" value="LogIn" style="width: 300px;height: 30px;font-weight: bold; font-size: medium">
+        </div>
+    </fieldset>
+</form>
+<!--푸터위치-->
+<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
+
+
+</body>
+</html>
