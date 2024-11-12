@@ -8,10 +8,10 @@ import java.util.List;
 
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
-    List<MemberEntity> findByName(String name);
+   //List<MemberEntity> findByUsername(String username);
 
-    boolean existsByNickName(String nickName);
+    boolean existsByUsername(String username);
 
-    MemberEntity findByNickName(String nickName);
+    MemberEntity findByUsername(String username);
 
 }

@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class ResultController {
+public class ResultManageController {
     @GetMapping("/resultManage")
     public String getResultManage(){
-        return "/resultManage";
+        return "/resultManage/resultManage";
     }
 
     @PostMapping("/resultManage")
     public String postResultManage(){
-        return "/resultManage";
+        return "/resultManage/resultManage";
     }
 }

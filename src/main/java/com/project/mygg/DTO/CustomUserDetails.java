@@ -2,7 +2,6 @@ package com.project.mygg.DTO;
 
 import com.project.mygg.entity.MemberEntity;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class CustomUserDetails implements UserDetails {
             @Override
             public String getAuthority() {
 
-                return memberEntity.getRole().toString();
+                return "ROLE_"+ memberEntity.getRole().toString();
             }
         });
 
@@ -40,7 +39,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return memberEntity.getName();
+        return memberEntity.getUsername();
     }
 
     // 사용자의 계정이 만료되었는지

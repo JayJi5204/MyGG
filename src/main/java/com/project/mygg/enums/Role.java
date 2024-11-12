@@ -1,7 +1,7 @@
 package com.project.mygg.enums;
 
 public enum Role {
-    ADMIN,MEMBER;
+    ADMIN,MANAGER,MEMBER;
 
     @Override
     public String toString() {

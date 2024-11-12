@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class MemberRequestDTO {
 
     @NotEmpty(message = "회원 아이디는 필수입니다.")
-    private String name;
+    private String username;
 
     @NotEmpty(message = "회원 비밀번호는 필수입니다.")
     private String password;
@@ -19,19 +19,11 @@ public class MemberRequestDTO {
     @NotEmpty(message = "롤 닉네임는 필수입니다.")
     private String nickName;
 
-    private int penalty;
+    private int penalty = 0;
 
-    private Tier tier;
+    private Tier tier = Tier.UNRANKED;
 
-    private Role role;
+    private Role role = Role.MANAGER;
 
 
-    public MemberRequestDTO(String name, String password, String nickName) {
-        this.name = name;
-        this.password = password;
-        this.nickName = nickName;
-        this.penalty = 0;
-        this.tier = Tier.UNRANKED;
-        this.role = Role.ADMIN;
-    }
 }

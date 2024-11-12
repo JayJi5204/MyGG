@@ -18,7 +18,7 @@ public class MemberResponseDTO {
 
     public MemberResponseDTO(MemberEntity memberEntity) {
         this.id = memberEntity.getId();
-        this.name = memberEntity.getName();
+        this.name = memberEntity.getUsername();
         this.nickName = memberEntity.getNickName();
         this.penalty = memberEntity.getPenalty();
         this.tier = Tier.UNRANKED;

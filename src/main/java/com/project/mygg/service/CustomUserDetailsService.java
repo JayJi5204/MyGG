@@ -17,12 +17,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        MemberEntity member = memberRepository.findByNickName(username);
+        MemberEntity member = memberRepository.findByUsername(username);
 
         if (member != null) {
             return new CustomUserDetails(member);
         }
-       return null;
+
+        throw new UsernameNotFoundException("User not found with username: " + username); // 메시지 수정
     }
+
 }

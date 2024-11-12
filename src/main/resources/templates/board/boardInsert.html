@@ -1,53 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>board board</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" type="text/css" href="/css/comm.css">
-    <link rel="stylesheet" type="text/css" href="/css/board.css">
-
+    <meta charset="UTF-8">
+    <title>임시 페이지</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-
 <!-- 헤더 위치 -->
-<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
 
-<div id="main" style="font-size:large; text-align: center; ">
-
-    <div id="search" style="height: 300px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
-        <h3>[ 상품 등록 <span style="font-size:30px;">&#9749;</span> ] <th:block th:text="${hello}"></th:block>  </h3>
-
-        <form name="fm_board_ins" autocomplete="on" action="/boardInsert" method="post">
-            <fieldset>
-
-                <legend> [커피 메뉴 등록] </legend>
-                <label>메뉴명</label> <input type="text" id="board" name="board"></p>
-                <label>종 류 </label><select name="kind">
-                <option value="의류">의류</option>
-                <option value="식품">식품</option>
-                <option value="전자기기">전자기기</option>
-            </select>
-                </p>
-                &nbsp;&nbsp;
-                <label>가 격 </label><input type="number" name="price"></p>
-
-                <input type="submit" value="메뉴 등록" style="width: 100px;height: 30px;font-weight: bold; font-size: medium">
-            </fieldset>
-        </form>
-
-
-    </div>
+<body>
+<div class="container">
+    임시페이지입니다
 
 </div>
+<!--푸터위치-->
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
 
-<!-- 푸터 위치 -->
-<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
-
-

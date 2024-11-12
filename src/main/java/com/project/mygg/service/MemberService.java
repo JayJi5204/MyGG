@@ -33,14 +33,14 @@ public class MemberService {
 
     @Transactional
     public void singUp(MemberRequestDTO memberRequestDTO) {
-        boolean haveMember=memberRepository.existsByNickName(memberRequestDTO.getNickName());
+        boolean haveMember = memberRepository.existsByUsername(memberRequestDTO.getUsername());
 
-        if(haveMember){
-            throw new IllegalArgumentException("error =" + memberRequestDTO.getNickName() + "is Member") ;
+        if (haveMember) {
+            throw new IllegalArgumentException("error =" + memberRequestDTO.getUsername() + "is Member");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(memberRequestDTO.getPassword());
-        MemberEntity member = new MemberEntity(memberRequestDTO,encodedPassword);
+        MemberEntity member = new MemberEntity(memberRequestDTO, encodedPassword);
         memberRepository.save(member);
     }
 
