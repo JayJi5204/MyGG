@@ -9,11 +9,12 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Data
 @Entity
 @Table(name = "member_entity")
 @NoArgsConstructor
@@ -27,6 +28,7 @@ public class MemberEntity {
 
     private String password;
 
+    @Column(unique = true)
     private String nickName;
 
     private int penalty;
@@ -48,9 +50,12 @@ public class MemberEntity {
 //    private List<ReplyEntity> replyEntity = new ArrayList<>();
 
 
-    public MemberEntity(MemberRequestDTO memberRequestDTO) {
+    public MemberEntity(MemberRequestDTO memberRequestDTO, String encodedPassword) {
         this.name = memberRequestDTO.getName();
-        this.password = memberRequestDTO.getPassword();
+        this.password = encodedPassword;
         this.nickName = memberRequestDTO.getNickName();
+        this.penalty=0;
+        this.tier=Tier.UNRANKED;
+        this.role=Role.ADMIN;
     }
 }

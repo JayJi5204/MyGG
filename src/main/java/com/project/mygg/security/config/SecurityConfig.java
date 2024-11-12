@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth)->auth
                         // permitAll() -> 모든 사용자에게 로그인하지 않아도 접근가능
-                        .requestMatchers("/home","/tierList","/rule","/ranking","/signIn","/signUp").permitAll()
+                        .requestMatchers("/", "/home", "/tierList","/rule", "/ranking", "/signIn", "/signUp").permitAll()
                         // hasRole() -> 특정한 권한이 있어야만 접근 가능
                         .requestMatchers("/result","/memberList").hasRole("ADMIN")
                         // hasAnyRole() -> 이 권한이 있으면 접근 가능
@@ -34,8 +34,8 @@ public class SecurityConfig {
 
         // 로그인 폼 응답
         http
-                .formLogin((auth)->auth.loginPage("/singIn")
-                        .loginProcessingUrl("/singIn")
+                .formLogin((auth)->auth.loginPage("/signIn")
+                        .loginProcessingUrl("/signIn")
                         .permitAll()
                 );
 

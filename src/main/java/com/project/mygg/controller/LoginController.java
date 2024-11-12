@@ -3,14 +3,11 @@ package com.project.mygg.controller;
 import com.project.mygg.DTO.MemberRequestDTO;
 import com.project.mygg.DTO.MemberResponseDTO;
 import com.project.mygg.service.MemberService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -35,22 +32,22 @@ public class LoginController {
         return "/login/signUp";
     }
 
+
+    @PostMapping("/signUp")
+    public String postSingIn(MemberRequestDTO memberRequestDTO) {
+        memberService.singUp(memberRequestDTO);
+        return "redirect:/signIn";
+    }
+
     //    @PostMapping("/signUp")
 //    public String postSingIn(@Valid @ModelAttribute("member") MemberRequestDTO memberRequestDTO, BindingResult result) {
 //        if (result.hasErrors()) {
 //            return "/login/signUp";
 //        }
-//        memberService.signUp(memberRequestDTO);
-//        return "redirect:/signUp";
+//        memberService.signUp2(memberRequestDTO);
+//        return "redirect:/signIp";
 //    }
-    @PostMapping("/signUp")
-    public String postSingIn(@Valid @ModelAttribute("member") MemberRequestDTO memberRequestDTO, BindingResult result) {
-        if (result.hasErrors()) {
-            return "/login/signUp";
-        }
-        memberService.signUp(memberRequestDTO);
-        return "redirect:/signUp";
-    }
+
 
 
     @GetMapping("/memberList")
