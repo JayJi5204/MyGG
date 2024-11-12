@@ -24,13 +24,6 @@ public class MemberService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-//    @Transactional
-//    public void signUp2(MemberRequestDTO memberRequestDTO) {
-//        validateMember(memberRequestDTO);
-//        MemberEntity memberEntity = new MemberEntity(memberRequestDTO);
-//        memberRepository.save(memberEntity);
-//    }
-
     @Transactional
     public void singUp(MemberRequestDTO memberRequestDTO) {
         boolean haveMember = memberRepository.existsByUsername(memberRequestDTO.getUsername());
@@ -44,19 +37,6 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-//    private void validateMember(MemberRequestDTO memberRequestDTO) {
-//        // 중복 회원 검증: 이름을 기준으로 중복 검사
-//        List<MemberEntity> findMembers = memberRepository.findByName(memberRequestDTO.getName());
-//        if (!findMembers.isEmpty()) {
-//            throw new IllegalStateException("이미 존재하는 회원입니다.");
-//        }
-//    }
-
-    //회원 전체 조회
-//    public List<MemberEntity> findMembers() {
-//        return memberRepository.findAll();
-//    }
-
     public List<MemberResponseDTO> findMembers() {
         List<MemberEntity> members = memberRepository.findAll();
         return members.stream()
@@ -64,10 +44,6 @@ public class MemberService {
                 .collect(Collectors.toList());
     }
 
-
-//    public Optional<MemberEntity> findOne(Long memberId) {
-//        return memberRepository.findById(memberId);
-//    }
 
     public Optional<MemberResponseDTO> findOne(Long memberId) {
         return memberRepository.findById(memberId).map(MemberResponseDTO::new);
