@@ -2,17 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>임시 페이지</title>
+    <title>회원 관리</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
 </head>
 <!-- 헤더 위치 -->
 <th:block th:replace="~{/comm/header :: headerFragment}"/>
 
 <body>
-<div class="container">
-임시페이지입니다
+<div class="container mt-5">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>아이디</th>
+                <th>닉네임</th>
+                <th>티어</th>
+                <th>권한</th>
+                <th>벌점</th>
+                <th>회원 삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="paging : ${paging}">
+                <td th:text="${paging.username}"></td>
+                <td th:text="${paging.nickName}"></td>
+                <td th:text="${paging.tier}"></td>
+                <td th:text="${paging.role}"></td>
+                <td th:text="${paging.penalty}"></td>
+                <td>
+                    <form th:action="@{/deleteMember/{id}(id=${paging.id})}" method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
+                        <button class="btn btn-danger" type="submit">회원 삭제</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
 
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number - 1}|}" aria-label="Previous">
+                        <span aria-hidden="true">이전</span>
+                    </a>
+                </li>
+
+                <li class="page-item" th:each="page : ${#numbers.sequence(0, paging.totalPages - 1)}"
+                    th:classappend="${page == paging.number} ? 'active'">
+                    <a class="page-link" th:href="@{|?page=${page}|}" th:text="${page + 1}"></a>
+                </li>
+
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number + 1}|}" aria-label="Next">
+                        <span aria-hidden="true">다음</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
+</body>
+
 <!--푸터위치-->
 <th:block th:replace="~{/comm/footer :: footerFragment}"/>
 
@@ -20,5 +71,4 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-</body>
 </html>

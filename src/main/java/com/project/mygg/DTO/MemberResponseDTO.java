@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberResponseDTO {
     private Long id;
+    private String username;
     private String name;
     private String nickName;
     private int penalty;
@@ -18,10 +19,11 @@ public class MemberResponseDTO {
 
     public MemberResponseDTO(MemberEntity memberEntity) {
         this.id = memberEntity.getId();
-        this.name = memberEntity.getUsername();
+        this.username = memberEntity.getUsername();
+        this.name=memberEntity.getName();
         this.nickName = memberEntity.getNickName();
         this.penalty = memberEntity.getPenalty();
-        this.tier = Tier.UNRANKED;
-        this.role = Role.MEMBER;
+        this.tier = memberEntity.getTier();
+        this.role = memberEntity.getRole();
     }
 }

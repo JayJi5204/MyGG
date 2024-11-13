@@ -29,34 +29,37 @@ public class LoginController {
     private final MemberService memberService;
     private final SessionService sessionService;
 
+    // 로그인 기능
     @GetMapping("/signIn")
     public String getLogin(Model model) {
         model.addAttribute("id", sessionService.sessionName());
-        System.out.println("===========================");
-        System.out.println(sessionService.sessionRole());
-        System.out.println("===========================");
-
         return "/login/signIn";
     }
 
-
+    // 회원가입 기능
     @GetMapping("/signUp")
     public String getSingIn(Model model) {
         model.addAttribute("member", new MemberRequestDTO());
         return "/login/signUp";
     }
 
-
     @PostMapping("/signUp")
     public String postSingIn(@Valid @ModelAttribute("member") MemberRequestDTO memberRequestDTO, BindingResult result) {
         if (result.hasErrors()) {
            return "/login/signUp";
         }
-        memberService.singUp(memberRequestDTO);
+
+        try {
+            memberService.singUp(memberRequestDTO);
+        } catch (IllegalArgumentException e) {
+            result.rejectValue("username", "error.username", e.getMessage());
+            return "/login/signUp";
+        }
 
         return "redirect:/signIn";
     }
 
+    // 로그아웃 기능
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -66,17 +69,6 @@ public class LoginController {
         }
         return "redirect:/";
     }
-
-    //    @PostMapping("/signUp")
-//    public String postSingIn(@Valid @ModelAttribute("member") MemberRequestDTO memberRequestDTO, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "/login/signUp";
-//        }
-//        memberService.signUp2(memberRequestDTO);
-//        return "redirect:/signIp";
-//    }
-
-
 
 }
 

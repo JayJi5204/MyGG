@@ -34,13 +34,13 @@ public class SecurityConfig {
         // 접근 제어
         http.authorizeHttpRequests((auth) -> auth
                 // permitAll() : 모든 사용자에게 로그인하지 않아도 접근가능
-                .requestMatchers("/", "/home", "/tierList", "/ranking", "/rule", "/gameResult", "/board" ,"/signIn", "/signUp").permitAll()
+                .requestMatchers("/img/*","/css/*","/js/*","/", "/home", "/tierList", "/ranking", "/rule", "/gameResult", "/board" ,"/signIn", "/signUp").permitAll()
 
                 // hasRole() : 특정한 권한이 있어야만 접근 가능
-                .requestMatchers("/resultManage").hasAnyRole("MANAGER","ADMIN")
+                .requestMatchers("/resultManage").hasRole("MANAGER")
                 .requestMatchers("/memberList").hasRole("ADMIN")
                 // hasAnyRole() : 이 권한이 있으면 접근 가능
-                .requestMatchers("/board/**").hasAnyRole("MEMBER")
+                .requestMatchers("/board/**").hasRole("MEMBER")
 
                 // authenticated() : 로그인만 하면 어디든 가능
                 .anyRequest().authenticated());

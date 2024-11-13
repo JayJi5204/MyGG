@@ -21,11 +21,12 @@ public class MemberEntity {
     private Long id;
 
     @Column(unique = true)
-    private String username;
+    private String username; // 멤버의 아이디를 의미함
 
     private String password;
 
-    @Column(unique = true)
+    private String name; // 실제 이름을 의미함
+
     private String nickName;
 
     private int penalty;
@@ -35,7 +36,6 @@ public class MemberEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private List<ChampionStatsEntity> championStatsEntity = new ArrayList<>();
@@ -54,5 +54,9 @@ public class MemberEntity {
         this.penalty = memberRequestDTO.getPenalty();
         this.tier = memberRequestDTO.getTier();
         this.role = memberRequestDTO.getRole();
+    }
+
+    public void updateNickName(MemberRequestDTO memberRequestDTO){
+        this.nickName=memberRequestDTO.getNickName();
     }
 }

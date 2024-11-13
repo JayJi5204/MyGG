@@ -124,6 +124,12 @@
             </tr>
             </tbody>
         </table>
+        <form th:action="@{/updateMember}" method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
+            <button class="btn btn-danger" type="submit">회원 삭제</button>
+        </form>
+        <form th:action="@{/withdrawalMember}" method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
+            <button class="btn btn-danger" type="submit">회원 삭제</button>
+        </form>
     </div>
 </div>
 </body>
