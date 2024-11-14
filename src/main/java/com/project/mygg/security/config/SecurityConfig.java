@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -34,14 +35,13 @@ public class SecurityConfig {
         // 접근 제어
         http.authorizeHttpRequests((auth) -> auth
                 // permitAll() : 모든 사용자에게 로그인하지 않아도 접근가능
-                .requestMatchers("/img/*","/css/*","/js/*","/", "/home", "/tierList", "/ranking", "/rule", "/gameResult", "/board" ,"/signIn", "/signUp").permitAll()
+                .requestMatchers("/css/**","/js/**","/img/**", "/", "/home", "/tierList", "/ranking", "/rule", "/signIn", "/signUp").permitAll()
 
                 // hasRole() : 특정한 권한이 있어야만 접근 가능
-                .requestMatchers("/resultManage").hasRole("MANAGER")
-                .requestMatchers("/memberList").hasRole("ADMIN")
+                .requestMatchers("/resultManage", "/playerManage").hasRole("MANAGER")
+                .requestMatchers("/memberManage").hasRole("ADMIN")
                 // hasAnyRole() : 이 권한이 있으면 접근 가능
-                .requestMatchers("/board/**").hasRole("MEMBER")
-
+                .requestMatchers("/board/**", "/gameResult/**", "/playerSearch/**").hasRole("MEMBER")
                 // authenticated() : 로그인만 하면 어디든 가능
                 .anyRequest().authenticated());
         // denyAll() -: 누구도 접근하지 못함
@@ -63,7 +63,8 @@ public class SecurityConfig {
 //        http
 //                .csrf((auth) -> auth.disable());
 
-        http
+
+                        http
                 .sessionManagement((auth) -> auth
                         // 하나의 아이디에 대해 다중 로그인을 허용하는 갯수
                         .maximumSessions(1)
@@ -74,7 +75,7 @@ public class SecurityConfig {
 
         http
                 // 세션 고정 보호
-                .sessionManagement((auth)-> auth
+                .sessionManagement((auth) -> auth
                         // none : 로그인 시 세션 정보 변경 안함
                         // newSession() : 로그인 시 세션 새로 생성
                         // changeSessionId() : 로그인시 동일한 세션에 대해 id변경

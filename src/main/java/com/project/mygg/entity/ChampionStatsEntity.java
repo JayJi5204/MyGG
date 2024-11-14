@@ -30,8 +30,8 @@ public class ChampionStatsEntity {
     private Line line;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private MemberEntity memberEntity;
+    @JoinColumn(name = "player_id")
+    private PlayerEntity playerEntity;
 
     public ChampionStatsEntity() {
         this.win = 0;

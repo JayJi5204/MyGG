@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 관리</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
+</head>
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
+
+<body>
+<div class="container mt-5">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>권한</th>
+                <th></th>
+                <th>회원 수정/삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="paging : ${paging}">
+                <td th:text="${paging.username}"></td>
+                <td th:text="${paging.name}"></td>
+                <td th:text="${paging.phoneNumber}"></td>
+                <td th:text="${paging.role}"></td>
+                <td></td>
+                <td>
+                    <div th:if="${paging.role != 'ADMIN'}">
+                        <form th:action="@{/updateMember/{id}(id=${paging.id})}" method="post" onsubmit="return confirm('수정하시겠습니까?');" style="display: inline;">
+                            <button class="btn btn-info" type="submit">회원 수정</button>
+                        </form>
+                        <form th:action="@{/deleteMember/{id}(id=${paging.id})}" method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
+                            <button class="btn btn-danger" type="submit">회원 삭제</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number - 1}|}" aria-label="Previous">
+                        <span aria-hidden="true">이전</span>
+                    </a>
+                </li>
+
+                <li class="page-item" th:each="page : ${#numbers.sequence(0, paging.totalPages - 1)}"
+                    th:classappend="${page == paging.number} ? 'active'">
+                    <a class="page-link" th:href="@{|?page=${page}|}" th:text="${page + 1}"></a>
+                </li>
+
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number + 1}|}" aria-label="Next">
+                        <span aria-hidden="true">다음</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+
+<!--푸터위치-->
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>

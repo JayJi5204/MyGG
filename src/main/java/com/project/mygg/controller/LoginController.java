@@ -1,7 +1,6 @@
 package com.project.mygg.controller;
 
 import com.project.mygg.DTO.MemberRequestDTO;
-import com.project.mygg.DTO.MemberResponseDTO;
 import com.project.mygg.service.MemberService;
 import com.project.mygg.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 @Log4j2
@@ -31,38 +28,45 @@ public class LoginController {
 
     // 로그인 기능
     @GetMapping("/signIn")
-    public String getLogin(Model model) {
+    public String getSignIn(Model model) {
         model.addAttribute("id", sessionService.sessionName());
         return "/login/signIn";
     }
 
     // 회원가입 기능
     @GetMapping("/signUp")
-    public String getSingIn(Model model) {
+    public String getSignUp(Model model) {
         model.addAttribute("member", new MemberRequestDTO());
         return "/login/signUp";
     }
 
     @PostMapping("/signUp")
-    public String postSingIn(@Valid @ModelAttribute("member") MemberRequestDTO memberRequestDTO, BindingResult result) {
+    public String postSignUp(@Valid @ModelAttribute("member") MemberRequestDTO memberRequestDTO, BindingResult result) {
         if (result.hasErrors()) {
-           return "/login/signUp";
+            return "/login/signUp";
         }
 
         try {
-            memberService.singUp(memberRequestDTO);
+            memberService.signUp(memberRequestDTO);
         } catch (IllegalArgumentException e) {
-            result.rejectValue("username", "error.username", e.getMessage());
+            String[] errorMessages = e.getMessage().split("\n");
+            for (String message : errorMessages) {
+                if (message.contains("아이디")) {
+                    result.rejectValue("username", "error.username", message);
+                } else if (message.contains("번호")) {
+                    result.rejectValue("phoneNumber", "error.phoneNumber", message);
+                }
+            }
             return "/login/signUp";
         }
 
         return "redirect:/signIn";
     }
 
+
     // 로그아웃 기능
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);

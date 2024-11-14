@@ -27,18 +27,11 @@ public class MemberEntity {
 
     private String name; // 실제 이름을 의미함
 
-    private String nickName;
-
-    private int penalty;
-
-    @Enumerated(EnumType.STRING)
-    private Tier tier;
+    @Column(unique = true)
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
-    private List<ChampionStatsEntity> championStatsEntity = new ArrayList<>();
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private List<BoardEntity> boardEntity = new ArrayList<>();
@@ -50,13 +43,12 @@ public class MemberEntity {
     public MemberEntity(MemberRequestDTO memberRequestDTO, String encodedPassword) {
         this.username = memberRequestDTO.getUsername();
         this.password = encodedPassword;
-        this.nickName = memberRequestDTO.getNickName();
-        this.penalty = memberRequestDTO.getPenalty();
-        this.tier = memberRequestDTO.getTier();
+        this.name=memberRequestDTO.getName();
+        this.phoneNumber=memberRequestDTO.getPhoneNumber();
         this.role = memberRequestDTO.getRole();
     }
 
-    public void updateNickName(MemberRequestDTO memberRequestDTO){
-        this.nickName=memberRequestDTO.getNickName();
+    public void updatePhoneNumber(MemberRequestDTO memberRequestDTO){
+        this.phoneNumber=memberRequestDTO.getPhoneNumber();
     }
 }

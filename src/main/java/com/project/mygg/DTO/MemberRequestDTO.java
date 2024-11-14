@@ -19,14 +19,9 @@ public class MemberRequestDTO {
     @NotEmpty(message = "회원 이름은 필수입니다.")
     private String name;
 
-    @NotEmpty(message = "롤 닉네임는 필수입니다.")
-    private String nickName;
+    @NotEmpty(message = "휴대폰 번호는 필수입니다.")
+    private String phoneNumber;
 
-    private int penalty = 0;
-
-    private Tier tier = Tier.UNRANKED;
-
-    private Role role = Role.MANAGER;
-
+    private Role role = Role.ADMIN;
 
 }

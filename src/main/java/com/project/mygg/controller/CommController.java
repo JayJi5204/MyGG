@@ -13,11 +13,6 @@ public class CommController {
 
     @RequestMapping("/")
     public String home() {
-
-        System.out.println("===========================");
-        System.out.println(sessionService.sessionRole());
-        System.out.println("===========================");
-
         return "/comm/home";
     }
 
@@ -43,6 +38,6 @@ public class CommController {
 
     @RequestMapping("/myPage")
     public String myPage(){
-        return "/comm/myPage";
+        return "/myPage/myPage";
     }
 }

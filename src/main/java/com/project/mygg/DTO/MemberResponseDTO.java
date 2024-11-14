@@ -12,18 +12,14 @@ public class MemberResponseDTO {
     private Long id;
     private String username;
     private String name;
-    private String nickName;
-    private int penalty;
-    private Tier tier;
+    private String phoneNumber;
     private Role role;
 
     public MemberResponseDTO(MemberEntity memberEntity) {
         this.id = memberEntity.getId();
         this.username = memberEntity.getUsername();
         this.name=memberEntity.getName();
-        this.nickName = memberEntity.getNickName();
-        this.penalty = memberEntity.getPenalty();
-        this.tier = memberEntity.getTier();
+        this.phoneNumber=memberEntity.getPhoneNumber();
         this.role = memberEntity.getRole();
     }
 }
