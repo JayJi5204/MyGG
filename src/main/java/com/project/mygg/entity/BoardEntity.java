@@ -1,7 +1,8 @@
 package com.project.mygg.entity;
 
+import com.project.mygg.DTO.BoardDTO.BoardRequestDTO;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Data
 @Entity
 @Table(name = "board_entity")
 @NoArgsConstructor
@@ -28,6 +29,8 @@ public class BoardEntity {
     @Column(nullable = false)
     private String content;
 
+    private String writer;
+
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime regDay;
@@ -40,5 +43,16 @@ public class BoardEntity {
     private MemberEntity memberEntity;
 
     @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.ALL)
-    private final List<ReplyEntity> replyEntity = new ArrayList<>();
+    private List<ReplyEntity> replyEntity = new ArrayList<>();
+
+    public BoardEntity(BoardRequestDTO boardRequestDTO,MemberEntity memberEntity) {
+        this.title=boardRequestDTO.getTitle();
+        this.content=boardRequestDTO.getContent();
+        this.writer=memberEntity.getUsername();
+    }
+
+    public void updateBoard(BoardRequestDTO boardRequestDTO) {
+        this.title = boardRequestDTO.getTitle();
+        this.content = boardRequestDTO.getContent();
+    }
 }

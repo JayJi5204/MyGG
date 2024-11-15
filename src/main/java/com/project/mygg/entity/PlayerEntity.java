@@ -1,6 +1,6 @@
 package com.project.mygg.entity;
 
-import com.project.mygg.DTO.PlayerRequestDTO;
+import com.project.mygg.DTO.PlayerDTO.PlayerRequestDTO;
 import com.project.mygg.enums.Tier;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -29,10 +29,8 @@ public class PlayerEntity {
     private int penalty;
 
 
-
     @OneToMany(mappedBy = "playerEntity", cascade = CascadeType.ALL)
     private List<ChampionStatsEntity> championStatsEntity = new ArrayList<>();
-
 
     public PlayerEntity(PlayerRequestDTO playerRequestDTO) {
         this.nickname = playerRequestDTO.getNickname();
@@ -41,6 +39,7 @@ public class PlayerEntity {
     }
 
     public void update(PlayerRequestDTO playerRequestDTO) {
+        this.nickname=playerRequestDTO.getNickname();
         this.tier=playerRequestDTO.getTier();
     }
 }

@@ -1,6 +1,6 @@
 package com.project.mygg.service;
 
-import com.project.mygg.DTO.PlayerRequestDTO;
+import com.project.mygg.DTO.PlayerDTO.PlayerRequestDTO;
 import com.project.mygg.DTO.PlayerResponseDTO;
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.enums.Tier;
@@ -70,6 +70,15 @@ public class PlayerService {
 
     @Transactional
     public void updatePlayer(Long id, PlayerRequestDTO playerRequestDTO) {
+        StringBuilder errorMessage = new StringBuilder();
+
+        if (playerRepository.existsByNickname(playerRequestDTO.getNickname())) {
+            errorMessage.append(playerRequestDTO.getNickname()).append("는 이미 존재하는 닉네임입니다.");
+        }
+
+        if (!errorMessage.isEmpty()) {
+            throw new IllegalArgumentException(errorMessage.toString());
+        }
         PlayerEntity playerEntity=playerRepository.findById(id).orElseThrow();
         playerEntity.update(playerRequestDTO);
         playerRepository.save(playerEntity);

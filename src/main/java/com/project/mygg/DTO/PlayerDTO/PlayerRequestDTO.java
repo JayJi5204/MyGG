@@ -1,12 +1,10 @@
-package com.project.mygg.DTO;
+package com.project.mygg.DTO.PlayerDTO;
 
-import com.project.mygg.enums.Role;
 import com.project.mygg.enums.Tier;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,5 +19,5 @@ public class PlayerRequestDTO {
     @Enumerated(EnumType.STRING)
     private Tier tier;
 
-    private int penalty;
+    private int penalty = 0;
 }

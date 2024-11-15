@@ -1,7 +1,7 @@
 package com.project.mygg.service;
 
-import com.project.mygg.DTO.MemberRequestDTO;
-import com.project.mygg.DTO.MemberResponseDTO;
+import com.project.mygg.DTO.MemberDTO.MemberRequestDTO;
+import com.project.mygg.DTO.MemberDTO.MemberResponseDTO;
 import com.project.mygg.entity.MemberEntity;
 import com.project.mygg.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -74,4 +74,10 @@ public class MemberService {
         return new MemberResponseDTO(member);
     }
 
+    @Transactional
+    public void updateMember(Long id, MemberRequestDTO memberRequestDTO) {
+        MemberEntity memberEntity=memberRepository.findById(id).orElseThrow();
+        memberEntity.update(memberRequestDTO);
+        memberRepository.save(memberEntity);
+    }
 }

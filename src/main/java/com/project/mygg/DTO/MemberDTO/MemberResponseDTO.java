@@ -1,4 +1,4 @@
-package com.project.mygg.DTO;
+package com.project.mygg.DTO.MemberDTO;
 
 import com.project.mygg.entity.MemberEntity;
 import com.project.mygg.enums.Role;

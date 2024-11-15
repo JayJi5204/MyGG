@@ -17,22 +17,22 @@ public class CommController {
     }
 
     @RequestMapping("/tierList")
-    public String tierList(){
+    public String tierList() {
         return "/comm/tierList";
     }
 
     @RequestMapping("/ranking")
-    public String ranking(){
+    public String ranking() {
         return "/comm/ranking";
     }
 
     @RequestMapping("/rule")
-    public String rule(){
+    public String rule() {
         return "/comm/rule";
     }
 
     @RequestMapping("/gameResult")
-    public String result(){
+    public String result() {
         return "/comm/gameResult";
     }
 

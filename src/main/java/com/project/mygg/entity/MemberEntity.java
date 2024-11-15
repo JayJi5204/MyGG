@@ -1,6 +1,6 @@
 package com.project.mygg.entity;
 
-import com.project.mygg.DTO.MemberRequestDTO;
+import com.project.mygg.DTO.MemberDTO.MemberRequestDTO;
 import com.project.mygg.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -49,5 +49,9 @@ public class MemberEntity {
 
     public void updatePhoneNumber(MemberRequestDTO memberRequestDTO) {
         this.phoneNumber = memberRequestDTO.getPhoneNumber();
+    }
+
+    public void update(MemberRequestDTO memberRequestDTO) {
+        this.role=memberRequestDTO.getRole();
     }
 }

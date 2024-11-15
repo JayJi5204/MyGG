@@ -1,6 +1,6 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.PlayerRequestDTO;
+import com.project.mygg.DTO.PlayerDTO.PlayerRequestDTO;
 import com.project.mygg.DTO.PlayerResponseDTO;
 import com.project.mygg.service.PlayerService;
 import jakarta.persistence.EntityNotFoundException;
@@ -58,17 +58,24 @@ public class PlayerController {
     }
 
     @GetMapping("/updatePlayer/{id}")
-    public String getUpdateMember(@PathVariable Long id, Model model) {
+    public String getUpdatePlayer(@PathVariable Long id, Model model) {
         PlayerResponseDTO playerResponseDTO = playerService.findOne(id)
                 .orElseThrow(() -> new EntityNotFoundException("선수를 찾을 수 없습니다."));
-        model.addAttribute("player",playerResponseDTO);
+        model.addAttribute("player", playerResponseDTO);
         return "/playerManage/updatePlayer";
     }
 
     @PostMapping("/updatePlayer/{id}")
-    public String postUpdateMember(@PathVariable Long id, @ModelAttribute("player") PlayerRequestDTO playerRequestDTO) {
-        playerService.updatePlayer(id, playerRequestDTO);
-        return "redirect:/updatePlayer";
+    public String postUpdatePlayer(@PathVariable Long id, @ModelAttribute("player") PlayerRequestDTO playerRequestDTO, RedirectAttributes redirectAttributes) {
+        try {
+            playerService.updatePlayer(id, playerRequestDTO);
+            redirectAttributes.addFlashAttribute("message", "선수가 성공적으로 변경되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/updatePlayer/" + id;
+        }
+        return "redirect:/playerManage";
+
     }
 
 

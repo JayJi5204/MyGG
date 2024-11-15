@@ -5,6 +5,5 @@ public enum Line {
     JUG,
     MID,
     ADC,
-    SUP,
-    ALL
+    SUP
 }

@@ -1,9 +1,7 @@
-package com.project.mygg.DTO;
+package com.project.mygg.DTO.MemberDTO;
 
 import com.project.mygg.enums.Role;
-import com.project.mygg.enums.Tier;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +24,6 @@ public class MemberRequestDTO {
     @NotEmpty(message = "휴대폰 번호는 필수입니다.")
     private String phoneNumber;
 
-    private Role role = Role.MANAGER;
+    private Role role = Role.MEMBER;
 
 }

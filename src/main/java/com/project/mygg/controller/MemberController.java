@@ -1,12 +1,11 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.MemberRequestDTO;
-import com.project.mygg.DTO.MemberResponseDTO;
+import com.project.mygg.DTO.MemberDTO.MemberRequestDTO;
+import com.project.mygg.DTO.MemberDTO.MemberResponseDTO;
 import com.project.mygg.service.MemberService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,16 +35,20 @@ public class MemberController {
         return "redirect:/memberManage";
     }
 
-    // 회원 닉네임 수정
+    // 회원 수정
     @GetMapping("/updateMember/{id}")
     public String getUpdateMember(@PathVariable Long id, Model model) {
+        MemberResponseDTO memberResponseDTO = memberService.findOne(id)
+                .orElseThrow(() -> new EntityNotFoundException("회원 찾을 수 없습니다."));
+        model.addAttribute("member", memberResponseDTO);
         return "/memberManage/updateMember";
     }
 
     @PostMapping("/updateMember/{id}")
-    public String postUpdateMember(@PathVariable Long id, @ModelAttribute("member") MemberRequestDTO memberRequestDTO) {
+    public String postUpdateMember(@PathVariable Long id, @ModelAttribute("member") MemberRequestDTO memberRequestDTO,RedirectAttributes redirectAttributes) {
+        memberService.updateMember(id, memberRequestDTO);
+        redirectAttributes.addFlashAttribute("message", "회원이 성공적으로 변경되었습니다.");
         return "redirect:/memberManage";
     }
-
 
 }

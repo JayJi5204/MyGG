@@ -1,6 +1,6 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.MemberRequestDTO;
+import com.project.mygg.DTO.MemberDTO.MemberRequestDTO;
 import com.project.mygg.service.MemberService;
 import com.project.mygg.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -64,7 +64,6 @@ public class LoginController {
 
         return "redirect:/signIn";
     }
-
 
 
     // 로그아웃 기능

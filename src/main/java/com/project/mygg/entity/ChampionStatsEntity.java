@@ -1,14 +1,14 @@
 package com.project.mygg.entity;
 
 
-import com.project.mygg.DTO.ChampionStatsRequestDTO;
+import com.project.mygg.DTO.ChampionStatsDTO.ChampionStatsRequestDTO;
 import com.project.mygg.enums.ChampionName;
 import com.project.mygg.enums.Line;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @Entity
 @NoArgsConstructor
 @Table(name = "championStats_entity")
@@ -41,12 +41,12 @@ public class ChampionStatsEntity {
 
     public ChampionStatsEntity(ChampionStatsRequestDTO championStatsRequestDTO) {
         this.championName = championStatsRequestDTO.getChampionName();
+        this.line = championStatsRequestDTO.getLine();
         this.win = championStatsRequestDTO.getWin();
         this.lose = championStatsRequestDTO.getLose();
         this.kill = championStatsRequestDTO.getKill();
         this.death = championStatsRequestDTO.getDeath();
         this.assist = championStatsRequestDTO.getAssist();
-        this.line = championStatsRequestDTO.getLine();
     }
 
     public int getKill(ChampionStatsEntity championStatsEntity) {

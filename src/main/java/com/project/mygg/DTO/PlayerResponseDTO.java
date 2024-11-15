@@ -17,6 +17,6 @@ public class PlayerResponseDTO {
         this.id = playerEntity.getId();
         this.nickname = playerEntity.getNickname();
         this.tier = playerEntity.getTier();
-        this.penalty = 0;
+        this.penalty = playerEntity.getPenalty();
     }
 }

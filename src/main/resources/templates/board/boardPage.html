@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-5" th:text="${title}">글 제목</h2>
+    <div th:each="board : ${board}">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input class="form-control" disabled id="title"
+                   name="title" th:value="${board.title}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <input class="form-control" disabled id="content"
+                   name="content" th:value="${board.content}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="writer">작성자</label>
+            <input class="form-control" disabled id="writer"
+                   name="writer" th:value="${board.writer}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="regDay">작성일</label>
+            <input class="form-control" disabled id="regDay"
+                   name="regDay" th:value="${board.regDay}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="modDay">수정일</label>
+            <input class="form-control" disabled id="modDay"
+                   name="modDay" th:value="${board.modDay}"
+                   type="text">
+        </div>
+        <a class="btn btn-primary" role="button" th:href="@{/board}">글 수정</a>
+        <a class="btn btn-warning" role="button" th:href="@{/board}">돌아가기</a>
+    </div>
+</div>
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

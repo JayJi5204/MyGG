@@ -1,6 +1,6 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.MemberResponseDTO;
+import com.project.mygg.DTO.MemberDTO.MemberResponseDTO;
 import com.project.mygg.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -21,7 +21,7 @@ public class MyPageController {
         return "/myPage/myPage";
     }
     @GetMapping("/updateMyPage")
-    public String getUpdateMember(Model model, Authentication authentication) {
+    public String getUpdateMyPage(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
         model.addAttribute("member", member);

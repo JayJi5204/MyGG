@@ -13,7 +13,6 @@
 <div class="container mt-5">
     <div>
         <div th:if="${message}" class="alert alert-success" role="alert" th:text="${message}"></div>
-        <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -33,9 +32,7 @@
                 <td th:text="${paging.role}"></td>
                 <td></td>
                 <td>
-                        <form th:action="@{/updateMember/{id}(id=${paging.id})}" th:if="${paging.role != T(com.project.mygg.enums.Role).ADMIN}"  method="post"style="display: inline;">
-                            <button class="btn btn-info" type="submit">회원 수정</button>
-                        </form>
+                    <a class="btn btn-primary" th:if="${paging.role != T(com.project.mygg.enums.Role).ADMIN}" th:href="@{/updateMember/{id}(id=${paging.id})}" role="button">회원 수정</a>
                         <form th:action="@{/deleteMember/{id}(id=${paging.id})}" th:if="${paging.role != T(com.project.mygg.enums.Role).ADMIN}"  method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
                             <button class="btn btn-danger" type="submit">회원 삭제</button>
                         </form>

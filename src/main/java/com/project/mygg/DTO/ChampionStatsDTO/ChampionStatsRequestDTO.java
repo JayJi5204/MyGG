@@ -1,4 +1,4 @@
-package com.project.mygg.DTO;
+package com.project.mygg.DTO.ChampionStatsDTO;
 
 import com.project.mygg.enums.ChampionName;
 import com.project.mygg.enums.Line;

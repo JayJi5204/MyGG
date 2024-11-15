@@ -1,6 +1,7 @@
 package com.project.mygg.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
 @Entity
 @Table(name = "reply_entity")
 @NoArgsConstructor
@@ -20,6 +21,7 @@ public class ReplyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id")
     private Integer replyNo;
+
     private String reply;
 
     @CreatedDate
