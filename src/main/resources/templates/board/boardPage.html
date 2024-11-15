@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <title>게시글</title>
@@ -31,17 +32,23 @@
         <div class="form-group">
             <label for="regDay">작성일</label>
             <input class="form-control" disabled id="regDay"
-                   name="regDay" th:value="${board.regDay}"
+                   name="regDay" th:value="${#temporals.format(board.getRegDay(), 'yyyy-MM-dd HH-mm')}"
                    type="text">
         </div>
         <div class="form-group">
             <label for="modDay">수정일</label>
             <input class="form-control" disabled id="modDay"
-                   name="modDay" th:value="${board.modDay}"
+                   name="modDay" th:value="${#temporals.format(board.getModDay(), 'yyyy-MM-dd HH-mm')}"
                    type="text">
         </div>
-        <a class="btn btn-primary" role="button" th:href="@{/board}">글 수정</a>
         <a class="btn btn-warning" role="button" th:href="@{/board}">돌아가기</a>
+        <a class="btn btn-primary" role="button" th:href="@{/updateBoard/{id}(id=${board.getId()})}"
+           th:if="${#authentication.principal.username} == ${board.writer}">글 수정</a>
+        <form method="post"
+              onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;"
+              th:action="@{/deleteBoard/{id}(id=${board.getId()})}" th:if="${#authentication.principal.username} == ${board.writer}">
+            <button class="btn btn-danger" type="submit">글 삭제</button>
+        </form>
     </div>
 </div>
 <th:block th:replace="~{/comm/footer :: footerFragment}"/>

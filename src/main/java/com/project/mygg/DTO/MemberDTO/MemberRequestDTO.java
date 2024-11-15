@@ -24,6 +24,6 @@ public class MemberRequestDTO {
     @NotEmpty(message = "휴대폰 번호는 필수입니다.")
     private String phoneNumber;
 
-    private Role role = Role.MEMBER;
+    private Role role = Role.ADMIN;
 
 }

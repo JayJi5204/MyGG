@@ -6,6 +6,8 @@ import com.project.mygg.service.BoardService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,25 +43,27 @@ public class BoardController {
         model.addAttribute("board", boardResponseDTO);
         return "/board/boardPage";
     }
-    @GetMapping("/update/{id}")
-    public String getUpdatePage(@PathVariable Long id, Model model) {
+    @GetMapping("/updateBoard/{id}")
+    public String getUpdatePage(@PathVariable Long id, Model model,@AuthenticationPrincipal UserDetails userDetails) {
         BoardResponseDTO boardResponseDTO = boardService.getBoard(id)
                 .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));;
+        if(!userDetails.getUsername().equals(boardResponseDTO.getWriter())) {
+            return "redirect:/board/" + id;}
         model.addAttribute("board", boardResponseDTO);
-        return "UpdatePage"; // 수정 페이지로 이동
+        return "/board/updateBoard"; // 수정 페이지로 이동
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/updateBoard/{id}")
     public String postUpdatePage(@PathVariable Long id,@ModelAttribute("board") BoardRequestDTO boardRequestDTO) {
         boardService.updateBoard(id, boardRequestDTO);
-        return "redirect:/boards/" + id; // 수정된 게시글 페이지로 리다이렉트
+        return "redirect:/board/" + id; // 수정된 게시글 페이지로 리다이렉트
     }
 
     // 게시글 삭제 페이지
-    @PostMapping("/delete/{id}")
+    @PostMapping("/deleteBoard/{id}")
     public String postDeletePage(@PathVariable Long id) {
         boardService.deleteBoard(id);
-        return "redirect:/"; // 삭제 후 메인 페이지로 리다이렉트
+        return "redirect:/board"; // 삭제 후 메인 페이지로 리다이렉트
     }
 
 }

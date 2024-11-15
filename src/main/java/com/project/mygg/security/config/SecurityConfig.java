@@ -50,6 +50,7 @@ public class SecurityConfig {
                         .loginPage("/signIn")
                         .loginProcessingUrl("/signIn")
                         .defaultSuccessUrl("/", true)
+                        .failureUrl("/signIn?error=true")
                         .permitAll());
 
         // 로그아웃
