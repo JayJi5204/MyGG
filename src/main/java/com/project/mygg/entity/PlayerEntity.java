@@ -1,7 +1,6 @@
 package com.project.mygg.entity;
 
 import com.project.mygg.DTO.PlayerRequestDTO;
-import com.project.mygg.DTO.PlayerResponseDTO;
 import com.project.mygg.enums.Tier;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,7 +21,7 @@ public class PlayerEntity {
     private Long id;
 
     @Column(unique = true)
-    private String nickName;
+    private String nickname;
 
     @Enumerated(EnumType.STRING)
     private Tier tier;
@@ -36,8 +35,12 @@ public class PlayerEntity {
 
 
     public PlayerEntity(PlayerRequestDTO playerRequestDTO) {
-        this.nickName = playerRequestDTO.getNickName();
+        this.nickname = playerRequestDTO.getNickname();
         this.tier = playerRequestDTO.getTier();
         this.penalty = playerRequestDTO.getPenalty();
+    }
+
+    public void update(PlayerRequestDTO playerRequestDTO) {
+        this.tier=playerRequestDTO.getTier();
     }
 }

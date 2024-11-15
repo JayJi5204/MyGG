@@ -2,7 +2,6 @@ package com.project.mygg.entity;
 
 import com.project.mygg.DTO.MemberRequestDTO;
 import com.project.mygg.enums.Role;
-import com.project.mygg.enums.Tier;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,12 +42,12 @@ public class MemberEntity {
     public MemberEntity(MemberRequestDTO memberRequestDTO, String encodedPassword) {
         this.username = memberRequestDTO.getUsername();
         this.password = encodedPassword;
-        this.name=memberRequestDTO.getName();
-        this.phoneNumber=memberRequestDTO.getPhoneNumber();
+        this.name = memberRequestDTO.getName();
+        this.phoneNumber = memberRequestDTO.getPhoneNumber();
         this.role = memberRequestDTO.getRole();
     }
 
-    public void updatePhoneNumber(MemberRequestDTO memberRequestDTO){
-        this.phoneNumber=memberRequestDTO.getPhoneNumber();
+    public void updatePhoneNumber(MemberRequestDTO memberRequestDTO) {
+        this.phoneNumber = memberRequestDTO.getPhoneNumber();
     }
 }

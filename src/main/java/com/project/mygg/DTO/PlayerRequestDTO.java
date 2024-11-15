@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class PlayerRequestDTO {
 
     @NotEmpty(message = "닉네임은 필수입니다.")
-    private String nickName;
+    private String nickname;
 
     @NotNull(message = "티어 선택은 필수입니다.")
     @Enumerated(EnumType.STRING)

@@ -31,7 +31,7 @@
             <tbody>
             <tr th:each="paging : ${paging}">
                 <td></td>
-                <td th:text="${paging.nickName}"></td>
+                <td th:text="${paging.nickname}"></td>
                 <td></td>
                 <td th:text="${paging.tier}"></td>
                 <td></td>
@@ -67,9 +67,9 @@
                         <span aria-hidden="true">다음</span>
                     </a>
                 </li>
-                <form th:action="@{/addPlayer}" method="post">
-                    <button class="btn btn-success ml-3" type="submit" >선수 등록</button>
-                </form>
+                <li>
+                    <a class="btn btn-success" role="button" th:href="@{/addPlayer}">선수 등록</a>
+                </li>
             </ul>
         </nav>
     </div>

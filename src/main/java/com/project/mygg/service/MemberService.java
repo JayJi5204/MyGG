@@ -30,11 +30,13 @@ public class MemberService {
         StringBuilder errorMessage = new StringBuilder();
 
         if (memberRepository.existsByUsername(memberRequestDTO.getUsername())) {
-            errorMessage.append(memberRequestDTO.getUsername()).append("는 이미 존재하는 아이디입니다.\n");
+            errorMessage.append(memberRequestDTO.getUsername()).append("는 이미 존재하는 아이디입니다.");
+        } else if (memberRepository.existsByPhoneNumber(memberRequestDTO.getPhoneNumber())) {
+            errorMessage.append(memberRequestDTO.getPhoneNumber()).append("는 이미 존재하는 휴대폰 번호입니다.");
         }
 
-        if (memberRepository.existsByPhoneNumber(memberRequestDTO.getPhoneNumber())) {
-            errorMessage.append(memberRequestDTO.getPhoneNumber()).append("는 이미 존재하는 번호입니다.\n");
+        if (!memberRequestDTO.getPassword().equals(memberRequestDTO.getCheckPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
         if (!errorMessage.isEmpty()) {
@@ -56,6 +58,7 @@ public class MemberService {
         return memberRepository.findById(memberId).map(MemberResponseDTO::new);
     }
 
+    @Transactional
     public void deleteMember(Long id) {
         memberRepository.deleteById(id);
     }

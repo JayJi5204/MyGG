@@ -53,8 +53,10 @@ public class LoginController {
             for (String message : errorMessages) {
                 if (message.contains("아이디")) {
                     result.rejectValue("username", "error.username", message);
-                } else if (message.contains("번호")) {
+                } else if (message.contains("휴대폰 번호")) {
                     result.rejectValue("phoneNumber", "error.phoneNumber", message);
+                } else if (message.contains("비밀번호")) {
+                    result.rejectValue("checkPassword", "error.checkPassword", message);
                 }
             }
             return "/login/signUp";
@@ -62,6 +64,7 @@ public class LoginController {
 
         return "redirect:/signIn";
     }
+
 
 
     // 로그아웃 기능

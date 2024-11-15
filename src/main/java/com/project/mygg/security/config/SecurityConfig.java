@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -35,16 +34,15 @@ public class SecurityConfig {
         // 접근 제어
         http.authorizeHttpRequests((auth) -> auth
                 // permitAll() : 모든 사용자에게 로그인하지 않아도 접근가능
-                .requestMatchers("/css/**","/js/**","/img/**", "/", "/home", "/tierList", "/ranking", "/rule", "/signIn", "/signUp").permitAll()
-
+                .requestMatchers("/css/**", "/js/**", "/img/**", "/", "/home", "/tierList", "/ranking", "/rule", "/signIn", "/signUp").permitAll()
                 // hasRole() : 특정한 권한이 있어야만 접근 가능
-                .requestMatchers("/resultManage", "/playerManage").hasRole("MANAGER")
-                .requestMatchers("/memberManage").hasRole("ADMIN")
+                .requestMatchers("/memberManage", "/updateMember/**", "/deleteMember/**").hasRole("ADMIN")
+                .requestMatchers("/resultManage", "/addResult", "/updateResult", "/playerManage", "/addPlayer", "/updatePlayer/**", "/deletePlayer/**").hasRole("MANAGER")
                 // hasAnyRole() : 이 권한이 있으면 접근 가능
                 .requestMatchers("/board/**", "/gameResult/**", "/playerSearch/**").hasRole("MEMBER")
                 // authenticated() : 로그인만 하면 어디든 가능
+                // denyAll() : 누구도 접근하지 못함
                 .anyRequest().authenticated());
-        // denyAll() -: 누구도 접근하지 못함
 
         // 로그인 폼 응답
         http
@@ -64,7 +62,7 @@ public class SecurityConfig {
 //                .csrf((auth) -> auth.disable());
 
 
-                        http
+        http
                 .sessionManagement((auth) -> auth
                         // 하나의 아이디에 대해 다중 로그인을 허용하는 갯수
                         .maximumSessions(1)

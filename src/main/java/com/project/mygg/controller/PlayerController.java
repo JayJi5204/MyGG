@@ -1,10 +1,9 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.MemberResponseDTO;
 import com.project.mygg.DTO.PlayerRequestDTO;
 import com.project.mygg.DTO.PlayerResponseDTO;
 import com.project.mygg.service.PlayerService;
-import com.project.mygg.service.SessionService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PlayerController {
 
     private final PlayerService playerService;
-    private final SessionService sessionService;
 
     @GetMapping("/playerManage")
     public String getMemberList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
@@ -40,17 +38,17 @@ public class PlayerController {
     @PostMapping("/addPlayer")
     public String postAddPlayer(@Valid @ModelAttribute("player") PlayerRequestDTO playerRequestDTO, BindingResult result) {
         if (result.hasErrors()) {
-            log.info("already Valid");
             return "/playerManage/addPlayer";
         }
-
         try {
             playerService.addPlayer(playerRequestDTO);
         } catch (IllegalArgumentException e) {
             String[] errorMessages = e.getMessage().split("\n");
             for (String message : errorMessages) {
                 if (message.contains("닉네임")) {
-                    result.rejectValue("nickName", "error.nickName", message);
+                    result.rejectValue("nickname", "error.nickname", message);
+                } else if (message.contains("티어")) {
+                    result.rejectValue("tier", "error.tier", message);
                 }
             }
             return "/playerManage/addPlayer";
@@ -59,14 +57,27 @@ public class PlayerController {
         return "redirect:/playerManage";
     }
 
+    @GetMapping("/updatePlayer/{id}")
+    public String getUpdateMember(@PathVariable Long id, Model model) {
+        PlayerResponseDTO playerResponseDTO = playerService.findOne(id)
+                .orElseThrow(() -> new EntityNotFoundException("선수를 찾을 수 없습니다."));
+        model.addAttribute("player",playerResponseDTO);
+        return "/playerManage/updatePlayer";
+    }
+
+    @PostMapping("/updatePlayer/{id}")
+    public String postUpdateMember(@PathVariable Long id, @ModelAttribute("player") PlayerRequestDTO playerRequestDTO) {
+        playerService.updatePlayer(id, playerRequestDTO);
+        return "redirect:/updatePlayer";
+    }
+
+
     @PostMapping("/deletePlayer/{id}")
     public String postDeletePlayer(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            System.out.println("Attempting to delete player with ID: " + id); // 로그 추가
             playerService.deletePlayer(id);
             redirectAttributes.addFlashAttribute("message", "선수가 성공적으로 삭제되었습니다.");
         } catch (Exception e) {
-            System.err.println("Error occurred while deleting player: " + e.getMessage()); // 로그 추가
             redirectAttributes.addFlashAttribute("errorMessage", "선수 삭제 중 오류가 발생했습니다: " + e.getMessage());
         }
         return "redirect:/playerManage";

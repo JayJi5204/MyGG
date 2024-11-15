@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlayerResponseDTO {
     private Long id;
-    private String nickName;
+    private String nickname;
     private Tier tier;
     private int penalty;
 
     public PlayerResponseDTO(PlayerEntity playerEntity) {
         this.id = playerEntity.getId();
-        this.nickName = playerEntity.getNickName();
+        this.nickname = playerEntity.getNickname();
         this.tier = playerEntity.getTier();
         this.penalty = 0;
     }

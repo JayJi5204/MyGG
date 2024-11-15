@@ -36,8 +36,5 @@ public class CommController {
         return "/comm/gameResult";
     }
 
-    @RequestMapping("/myPage")
-    public String myPage(){
-        return "/myPage/myPage";
-    }
+
 }
