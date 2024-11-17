@@ -1,7 +1,7 @@
 package com.project.mygg.service;
 
 import com.project.mygg.DTO.PlayerDTO.PlayerRequestDTO;
-import com.project.mygg.DTO.PlayerResponseDTO;
+import com.project.mygg.DTO.PlayerDTO.PlayerResponseDTO;
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.enums.Tier;
 import com.project.mygg.repository.PlayerRepository;

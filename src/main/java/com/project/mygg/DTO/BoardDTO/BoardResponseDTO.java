@@ -30,7 +30,6 @@ public class BoardResponseDTO {
 
     private LocalDateTime modDay;
 
-    private MemberEntity memberEntity;
 
     public BoardResponseDTO(BoardEntity boardEntity) {
         this.id = boardEntity.getId();
@@ -39,6 +38,5 @@ public class BoardResponseDTO {
         this.writer= boardEntity.getWriter();
         this.regDay = boardEntity.getRegDay();
         this.modDay = boardEntity.getModDay();
-        this.memberEntity = boardEntity.getMemberEntity();
     }
 }

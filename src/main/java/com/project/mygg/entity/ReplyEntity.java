@@ -20,9 +20,11 @@ public class ReplyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id")
-    private Integer replyNo;
+    private Long id;
 
     private String reply;
+
+    private String replyWriter;
 
     @CreatedDate
     @Column(updatable = false)

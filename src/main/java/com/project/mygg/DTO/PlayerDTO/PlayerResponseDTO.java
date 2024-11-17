@@ -1,4 +1,4 @@
-package com.project.mygg.DTO;
+package com.project.mygg.DTO.PlayerDTO;
 
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.enums.Tier;

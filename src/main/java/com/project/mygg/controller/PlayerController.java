@@ -1,7 +1,7 @@
 package com.project.mygg.controller;
 
 import com.project.mygg.DTO.PlayerDTO.PlayerRequestDTO;
-import com.project.mygg.DTO.PlayerResponseDTO;
+import com.project.mygg.DTO.PlayerDTO.PlayerResponseDTO;
 import com.project.mygg.service.PlayerService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
