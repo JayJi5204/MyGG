@@ -45,14 +45,17 @@ public class BoardEntity {
     @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.ALL)
     private List<ReplyEntity> replyEntity = new ArrayList<>();
 
-    public BoardEntity(BoardRequestDTO boardRequestDTO,MemberEntity memberEntity) {
-        this.title=boardRequestDTO.getTitle();
-        this.content=boardRequestDTO.getContent();
-        this.writer=memberEntity.getUsername();
+    public BoardEntity(BoardRequestDTO boardRequestDTO, MemberEntity memberEntity) {
+        this.title = boardRequestDTO.getTitle();
+        this.content = boardRequestDTO.getContent();
+        this.writer = memberEntity.getUsername();
+        this.memberEntity=memberEntity;
     }
+
 
     public void updateBoard(BoardRequestDTO boardRequestDTO) {
         this.title = boardRequestDTO.getTitle();
         this.content = boardRequestDTO.getContent();
+        this.writer = memberEntity.getUsername();
     }
 }

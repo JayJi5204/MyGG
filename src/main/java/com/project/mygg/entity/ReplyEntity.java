@@ -1,8 +1,8 @@
 package com.project.mygg.entity;
 
+import com.project.mygg.DTO.ReplyDTO.ReplyRequestDTO;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -22,16 +22,18 @@ public class ReplyEntity {
     @Column(name = "reply_id")
     private Long id;
 
-    private String reply;
+    private Long brdId;
+
+    private String replyContent;
 
     private String replyWriter;
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime regDay;
+    private LocalDateTime replyRegDay;
 
     @LastModifiedDate
-    private LocalDateTime modDay;
+    private LocalDateTime replyModDay;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -40,4 +42,19 @@ public class ReplyEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private BoardEntity boardEntity;
+
+    public ReplyEntity(ReplyRequestDTO replyRequestDTO, BoardEntity boardEntity, MemberEntity memberEntity) {
+        this.replyContent = replyRequestDTO.getReplyContent();
+        this.brdId = boardEntity.getId();
+        this.replyWriter = memberEntity.getUsername();
+        this.memberEntity = memberEntity;
+        this.boardEntity = boardEntity;
+    }
+
+
+    public void updateReply(ReplyRequestDTO replyRequestDTO) {
+        this.replyContent = replyRequestDTO.getReplyContent();
+    }
+
+
 }

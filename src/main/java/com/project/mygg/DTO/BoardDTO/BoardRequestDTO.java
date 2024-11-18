@@ -21,10 +21,4 @@ public class BoardRequestDTO {
     private String content;
 
     private String writer;
-
-    public BoardRequestDTO(String title, String content, MemberEntity memberEntity) {
-        this.title = title;
-        this.content = content;
-        this.writer = memberEntity.getUsername();
-    }
 }

@@ -1,8 +1,6 @@
 package com.project.mygg.DTO.ReplyDTO;
 
-import com.project.mygg.entity.BoardEntity;
 import com.project.mygg.entity.ReplyEntity;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,20 +11,20 @@ import java.time.LocalDateTime;
 public class ReplyResponseDTO {
     private Long id;
 
-    private String reply;
+    private String replyContent;
 
     private String replyWriter;
 
-    private LocalDateTime regDay;
+    private LocalDateTime replyRegDay;
 
-    private LocalDateTime modDay;
+    private LocalDateTime replyModDay;
 
 
     public ReplyResponseDTO(ReplyEntity replyEntity) {
         this.id = replyEntity.getId();
-        this.reply = replyEntity.getReply();
+        this.replyContent = replyEntity.getReplyContent();
         this.replyWriter= replyEntity.getReplyWriter();
-        this.regDay = replyEntity.getRegDay();
-        this.modDay = replyEntity.getModDay();
+        this.replyRegDay = replyEntity.getReplyRegDay();
+        this.replyModDay = replyEntity.getReplyModDay();
     }
 }

@@ -55,7 +55,11 @@ public class BoardService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         MemberEntity memberEntity = memberRepository.findByUsername(username);
-
+        BoardEntity boardEntity = boardRepository.findById(id)
+                .orElseThrow();
+        if (!boardEntity.getWriter().equals(memberEntity.getUsername())) {
+            throw new SecurityException("작성자만 게시글을 삭제할 수 있습니다.");
+        }
         boardRepository.deleteById(id);
     }
 
@@ -66,6 +70,9 @@ public class BoardService {
         String username = authentication.getName();
         MemberEntity memberEntity = memberRepository.findByUsername(username);
         BoardEntity boardEntity = boardRepository.findById(id).orElseThrow();
+        if (!boardEntity.getWriter().equals(memberEntity.getUsername())) {
+            throw new SecurityException("작성자만 게시글을 수정할 수 있습니다.");
+        }
         boardEntity.updateBoard(boardRequestDTO);
         boardRepository.save(boardEntity);
     }

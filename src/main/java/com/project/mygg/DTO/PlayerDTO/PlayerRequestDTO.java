@@ -18,6 +18,5 @@ public class PlayerRequestDTO {
     @NotNull(message = "티어 선택은 필수입니다.")
     @Enumerated(EnumType.STRING)
     private Tier tier;
-
     private int penalty = 0;
 }
