@@ -19,4 +19,5 @@ public class PlayerResponseDTO {
         this.tier = playerEntity.getTier();
         this.penalty = playerEntity.getPenalty();
     }
+
 }

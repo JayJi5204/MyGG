@@ -14,7 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,14 +24,14 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
 
+    // 선수 추가
     @Transactional
     public void addPlayer(PlayerRequestDTO playerRequestDTO) {
         StringBuilder errorMessage = new StringBuilder();
 
         if (playerRepository.existsByNickname(playerRequestDTO.getNickname())) {
             errorMessage.append(playerRequestDTO.getNickname()).append("는 이미 존재하는 닉네임입니다.");
-        }
-        else if (!playerRequestDTO.getTier().equals(Tier.UNRANKED)) {
+        } else if (!playerRequestDTO.getTier().equals(Tier.UNRANKED)) {
             if (playerRepository.existsByTier(playerRequestDTO.getTier())) {
                 errorMessage.append(playerRequestDTO.getTier()).append(" 티어는 이미 존재하는 티어입니다.");
             }
@@ -43,18 +44,20 @@ public class PlayerService {
         playerRepository.save(player);
     }
 
-
+    // 선수 전체 조회
     public Page<PlayerResponseDTO> findPlayers(int page) {
         Pageable pageable = PageRequest.of(page, 20, Sort.by(Sort.Direction.DESC, "nickname"));
         return playerRepository.findAll(pageable).map(PlayerResponseDTO::new);
     }
 
+    // 선수 개별 조회
     public Optional<PlayerResponseDTO> findOne(Long playerInd) {
         return playerRepository.findById(playerInd).map(PlayerResponseDTO::new);
     }
 
+    // 선수 삭제
     @Transactional
-    public void deletePlayer(Long id){
+    public void deletePlayer(Long id) {
         playerRepository.deleteById(id);
     }
 
@@ -68,19 +71,20 @@ public class PlayerService {
         return new PlayerResponseDTO(player);
     }
 
+    // 선수 수정
     @Transactional
     public void updatePlayer(Long id, PlayerRequestDTO playerRequestDTO) {
-        StringBuilder errorMessage = new StringBuilder();
-
-        if (playerRepository.existsByNickname(playerRequestDTO.getNickname())) {
-            errorMessage.append(playerRequestDTO.getNickname()).append("는 이미 존재하는 닉네임입니다.");
-        }
-
-        if (!errorMessage.isEmpty()) {
-            throw new IllegalArgumentException(errorMessage.toString());
-        }
-        PlayerEntity playerEntity=playerRepository.findById(id).orElseThrow();
+        PlayerEntity playerEntity = playerRepository.findById(id).orElseThrow();
         playerEntity.update(playerRequestDTO);
         playerRepository.save(playerEntity);
     }
+
+    // 티어리스트
+    public List<PlayerResponseDTO> tierList() {
+        List<PlayerEntity> player = playerRepository.findAllByOrderByTier(); // 정렬된 리스트 가져오기
+        return player.stream()
+                .map(PlayerResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -1,17 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>임시 페이지</title>
+    <title>내전 규칙</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
 </head>
 <!-- 헤더 위치 -->
 <th:block th:replace="~{/comm/header :: headerFragment}"/>
 
 <body>
-<div class="container">
-임시페이지입니다
+<div class="container mt-5">
+    <table class="table table-bordered">
+        <h1 class="text-center mb-4">[내전 가이드 및 규칙]</h1>
+        <tbody>
+        <tr>
+            <th rowspan="2">내전 참여 방법</th>
+            <th>주최자</th>
+            <td>- 양식에 맞춰 투표 등록<br>
+                ※시간 일자<br>
+                ex) 2230 토요일 내전 / 2230 9월 30일 내전
+            </td>
+        </tr>
+        <tr>
+            <th>참여자</th>
+            <td>- 내전 시간 30분전까지 투표 완료<br>
+                - 게스트 있을 시 투표 일정 댓글에 적을 것<br>
+                - 참여자 및 게스트 투표 순서에 따라 우선권 부여<br>
+                ※단, 지각 시(5분 후), 후 순위에게 우선권 부여<br>
+                - 내전 시작 30분이내에 불참으로 변경 필요 && 후보자 없는 경우, 대체 인원 수급
+            </td>
+        </tr>
+        <tr>
+            <th>벌점</th>
+            <th>-</th>
+            <td>- 지각 : 5분당 10점<br>
+                - 욕 : 판당 25점<br>
+                ※단, 해당 항목은 추가 될 수 있음
+            </td>
+        </tr>
+        <tr>
+            <th rowspan="2">인게임</th>
+            <th>참여자</th>
+            <td>- 감정표현 사용 금지<br>
+                ※단, 시작 및 종료, 퍼스트 블러드 시 미적용
+            </td>
+        </tr>
+        <tr>
+            <th>관전자</th>
+            <td>- 마이크 사용 금지<br>
+                ※단, 라이브 요청은 가능
+            </td>
+        </tr>
 
+        <tr>
+            <th rowspan="2">게임 종료 직후</th>
+            <th>참여자</th>
+            <td rowspan="2">- 게임 피드백 금지</td>
+        </tr>
+        <tr>
+            <th>관전자</th>
+        </tr>
+
+        <tr>
+            <th rowspan="2">내전 종료</th>
+            <th>참여자</th>
+            <td>- POG 투표<br>
+                - 원할 경우 게임 피드백 진행
+            </td>
+        </tr>
+        <tr>
+            <th>관전자</th>
+            <td>- 원할 경우 게임 피드백 진행</td>
+        </tr>
+
+        <tr>
+            <th>POG 선정 기준</th>
+            <th>참여자</th>
+            <td>- 해당 판 이긴 팀에서 후보 선택<br>
+                - 최다 득표 후보로 선정
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
 </div>
 <!--푸터위치-->
 <th:block th:replace="~{/comm/footer :: footerFragment}"/>

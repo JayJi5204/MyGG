@@ -1,120 +1,67 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Item List</title>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-
-    <link href="/css/comm.css" rel="stylesheet" type="text/css">
-    <link href="/css/board.css" rel="stylesheet" type="text/css">
-
+    <meta charset="UTF-8">
+    <title>임시 페이지</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-
 <!-- 헤더 위치 -->
-<th:block th:replace="~{/comm/header :: headerFragment}"></th:block>
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
 
-<div id="main" style="font-size:large; text-align: center; ">
+<body>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+        <tr class="tr_td">
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="tr_td" th:each="paging : ${paging}">
+            <th th:text="${paging.getId()}">번호</th>
+            <td>
+                <a th:href="@{/board/{id}(id=${paging.getId()})}" th:text="${paging.getTitle()}">제목</a>
+            </td>
 
-    <div id="search"
-         style="height: 150px;padding: 15px; font-size: small; width: 90%; margin-left: auto;  margin-right: auto;">
-        <h3>[ Item Management <span style="font-size:30px;">&#128722;</span> ]
-            <th:block th:text="${hello}"></th:block>
-        </h3>
+            <td th:text="${paging.getWriter()}">작성자</td>
+            <td th:text="${#temporals.format(paging.getRegDay(), 'yyyy-MM-dd')}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-        <form action="/boardSearch" autocomplete="on" method="post" name="fm_board">
-            <fieldset>
-                <legend> [검색조건]</legend>
-                <label>등록기간</label><input id="start_date" max="2030-12-31" min="2020-01-01" name="start_date"
-                                          type="date">
-                - <input id="end_date" max="2030-12-31" min="2020-01-01" name="end_date" type="date">
-                &nbsp;&nbsp;
-                <label>메뉴명</label> <input id="board" name="board" type="text">
-                &nbsp;&nbsp;
-                <label>종류</label> <select id="kind" name="kind">
-                <option value="ALL">전체</option>
-                <option value="의류">의류</option>
-                <option value="식품">식품</option>
-                <option value="전자기기">전자기기</option>
-            </select>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${paging.number - 1}|}" aria-label="Previous">
+                    <span aria-hidden="true">이전</span>
+                </a>
+            </li>
 
-                &nbsp;&nbsp;<input style="width: 80px;height: 30px;font-weight: bold; font-size: medium" type="submit"
-                                   value="조회">
-                &nbsp;&nbsp;<button style="width: 80px;height: 30px;font-weight: bold; font-size: medium"><a
-                    href="/boardInsert">등록</a></button>
-                &nbsp;&nbsp;<button id="IdUpdateAll" onclick="onModify()"
-                                    style="width: 80px;height: 30px;font-weight: bold; font-size: medium"
-                                    type="button">가격수정
-            </button>
-                <!-- <a href="javascript:loadDocArray()">test</a> -->
-                <!--        <label>CheckBox : </label><span id="idCheckBox"></span>-->
-            </fieldset>
-        </form>
-    </div>
+            <li class="page-item" th:each="page : ${#numbers.sequence(0, paging.totalPages - 1)}"
+                th:classappend="${page == paging.number} ? 'active'">
+                <a class="page-link" th:href="@{|?page=${page}|}" th:text="${page + 1}"></a>
+            </li>
 
-    <form action="/updatePrice" id="IdFormTable" method="post" name="formTable">
-        <table class="table">
-            <thead>
-            <tr class="tr_td">
-                <th>Chk</th>
-                <th>커피No</th>
-                <th>메뉴명</th>
-                <th>종류</th>
-                <th>가격</th>
-                <th>등록일</th>
-                <th>수정일</th>
-                <th>수정</th>
-                <th>삭제</th>
-            </tr>
-            </thead>
-            <tbody id="t_body">
-            <!--- 데이타 출력 부분 -->
-            <tr th:each="list : ${list}">
-                <td><input name="chkItemNo" th:value="${list.getNo()}" type="checkbox"></td>
-                <th th:text="${list.getNo()}">커피No</th>
-                <td th:text="${list.getItem()}">메뉴명</td>
-                <td th:text="${list.getKind()}">종류</td>
-                <td th:text="${#numbers.formatInteger(list.getPrice(),0,'COMMA')}">가격</td>
-                <td th:text="${list.getReg_day()}">등록일</td>
-                <td th:text="${list.getMod_day()}">수정일</td>
-                <td><a th:href="@{/board_update(no=${list.getNo()})}">수정</a></td>
-                <td><a th:href="@{/board_delete(no=${list.getNo()})}">삭제</a></td>
-            </tr>
-            </tbody>
-        </table>
-        <input name="hidden_price" type="hidden">
-    </form>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${paging.number + 1}|}" aria-label="Next">
+                    <span aria-hidden="true">다음</span>
+                </a>
+            </li>
+            <li class="ml-3">
+                <a class="btn btn-success" role="button" th:href="@{/createBoard}">글 작성</a>
+            </li>
+        </ul>
+    </nav>
 </div>
-<!--푸터위치-->
-<th:block th:replace="~{/comm/footer :: footerFragment}"></th:block>
-
-
-<script>
-    const startNow = new Date();
-    const endNow = new Date();
-    const startTime = new Date(startNow.setDate(startNow.getDate() - 30));
-    const endTime = new Date(endNow.setHours(endNow.getHours() + 9));
-    document.getElementById("start_date").value= startTime.toISOString().slice(0,10);
-    document.getElementById("end_date").value= endTime.toISOString().slice(0,10);
-
-      function onModify(){
-      let _price = prompt("가격을 입력하세요");
-
-      if(_price == undefined){
-        return;
-      }else if(_price ==""){
-        alert("가격을 입력하세요");
-        onModify();
-      }else if(_price != ""){
-         let _frm = document.formTable;
-         _frm.hidden_price.value = _price;
-         _frm.submit();
-      }
-    }
-
-</script>
-
 </body>
+<!--푸터위치-->
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </html>
-
-

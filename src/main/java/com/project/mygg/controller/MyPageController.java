@@ -20,6 +20,7 @@ public class MyPageController {
     public String myPage(){
         return "/myPage/myPage";
     }
+
     @GetMapping("/updateMyPage")
     public String getUpdateMyPage(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();

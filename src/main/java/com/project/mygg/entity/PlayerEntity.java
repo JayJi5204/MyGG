@@ -42,4 +42,9 @@ public class PlayerEntity {
         this.nickname=playerRequestDTO.getNickname();
         this.tier=playerRequestDTO.getTier();
     }
+
+    // enum값 정수로 변환
+    public int getTierValue() {
+        return this.tier.getValue();
+    }
 }

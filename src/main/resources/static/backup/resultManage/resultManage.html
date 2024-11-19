@@ -2,35 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Player Tier List</title>
+    <title>임시 페이지</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/comm.css" rel="stylesheet" type="text/css">
 </head>
 <!-- 헤더 위치 -->
 <th:block th:replace="~{/comm/header :: headerFragment}"/>
 
 <body>
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Player Tier List</h1>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>티어</th>
-            <th>플레이어</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="tier : ${T(com.project.mygg.enums.Tier).values()}">
-            <td th:text="${tier}"></td>
-            <td>
-                <div th:each="player : ${player}" th:if="${player.tier == tier}" th:text="${player.nickname}"></div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+임시페이지입니다
+
 </div>
 </body>
-<!-- 푸터 위치 -->
+<!--푸터위치-->
 <th:block th:replace="~{/comm/footer :: footerFragment}"/>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

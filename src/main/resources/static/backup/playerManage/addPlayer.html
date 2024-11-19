@@ -2,20 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>선수 수정</title>
+    <title>선수 등록</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/item.css" rel="stylesheet" type="text/css">
-    <link href="/css/comm.css" rel="stylesheet" type="text/css">
 </head>
 <!-- 헤더 위치 -->
 <th:block th:replace="~{/comm/header :: headerFragment}"/>
 
 <body>
 <div class="container">
-    <h2 class="mt-5">선수 수정</h2>
-    <form th:action="@{'/updatePlayer/'+${player.id}}" class="mt-3" method="post" role="form" th:object="${player}">
+    <h2 class="mt-5">선수 등록</h2>
+    <form th:action="@{/addPlayer}" class="mt-3" method="post" role="form" th:object="${player}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div class="form-group">
-            <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
             <label for="nickname">닉네임</label>
             <input class="form-control" id="nickname" name="nickname" placeholder="닉네임을 입력하세요"
                    th:class="${#fields.hasErrors('nickname')}? 'form-control fieldError' : 'form-control'"
@@ -25,7 +24,7 @@
         </div>
         <div class="form-group">
             <label for="tier">티어</label>
-            <select th:field="*{tier}" name="tier" id="tier" class="form-control">
+            <select th:field="*{tier}" name="memberId" id="tier" class="form-control">
                 <option value="">티어</option>
                 <option th:each="tier : ${T(com.project.mygg.enums.Tier).values()}"
                         th:value="${tier}"
@@ -33,7 +32,7 @@
             </select>
             <p th:errors="*{tier}" th:if="${#fields.hasErrors('tier')}" class="error">오류 메세지</p>
         </div>
-        <button class="btn btn-primary" type="submit">수정 완료</button>
+        <button class="btn btn-primary" type="submit">선수 등록</button>
         <a class="btn btn-danger" th:href="@{/playerManage}" role="button">취소</a>
     </form>
 </div>

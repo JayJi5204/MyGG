@@ -1,4 +1,25 @@
- .navbar {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
+.fieldError {
+        border-color: #bd2130;
+    }
+
+.error{
+        color:red;
+}
+
+.table thead th {
+    background-color: #343a40;
+    color: white;
+
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.table {
+    text-align: center;
+}
+
+.table th, .table td {
+    vertical-align: middle; /* 수직 가운데 정렬 */
+}

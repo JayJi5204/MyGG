@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>선수 관리</title>
+    <title>회원 관리</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/item.css" rel="stylesheet" type="text/css">
-    <link href="/css/comm.css" rel="stylesheet" type="text/css">
 </head>
 <!-- 헤더 위치 -->
 <th:block th:replace="~{/comm/header :: headerFragment}"/>
@@ -17,36 +16,32 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>권한</th>
                 <th></th>
-                <th>닉네임</th>
-                <th></th>
-                <th>티어</th>
-                <th></th>
-                <th>벌점</th>
-                <th></th>
-                <th></th>
-                <th>선수 수정/삭제</th>
+                <th>회원 수정/삭제</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="paging : ${paging}">
-                <td></td>
-                <td th:text="${paging.nickname}"></td>
-                <td></td>
-                <td th:text="${paging.tier}"></td>
-                <td></td>
-                <td th:text="${paging.penalty}"></td>
-                <td></td>
+                <td th:text="${paging.username}"></td>
+                <td th:text="${paging.name}"></td>
+                <td th:text="${paging.phoneNumber}"></td>
+                <td th:text="${paging.role}"></td>
                 <td></td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{/updatePlayer/{id}(id=${paging.id})}" role="button">선수 수정</a>
-                    <form th:action="@{/deletePlayer/{id}(id=${paging.id})}" method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
-                        <button class="btn btn-danger" type="submit">선수 삭제</button>
-                    </form>
+                    <a class="btn btn-primary" th:if="${paging.role != T(com.project.mygg.enums.Role).ADMIN}" th:href="@{/updateMember/{id}(id=${paging.id})}" role="button">회원 수정</a>
+                        <form th:action="@{/deleteMember/{id}(id=${paging.id})}" th:if="${paging.role != T(com.project.mygg.enums.Role).ADMIN}"  method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
+                            <button class="btn btn-danger" type="submit">회원 삭제</button>
+                        </form>
                 </td>
             </tr>
             </tbody>
+
         </table>
+
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
@@ -64,9 +59,6 @@
                     <a class="page-link" th:href="@{|?page=${paging.number + 1}|}" aria-label="Next">
                         <span aria-hidden="true">다음</span>
                     </a>
-                </li>
-                <li class="ml-3">
-                    <a class="btn btn-success" role="button" th:href="@{/addPlayer}">선수 등록</a>
                 </li>
             </ul>
         </nav>

@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,7 @@ public class MemberService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    // 회원 가입
     @Transactional
     public void signUp(MemberRequestDTO memberRequestDTO) {
         StringBuilder errorMessage = new StringBuilder();
@@ -48,22 +50,32 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-
+    // 회원 목록
     public Page<MemberResponseDTO> findMembers(int page) {
         Pageable pageable = PageRequest.of(page, 20, Sort.by(Sort.Direction.DESC, "username"));
         return memberRepository.findAll(pageable).map(MemberResponseDTO::new);
     }
 
+    // 회원 개별 목록
     public Optional<MemberResponseDTO> findOne(Long memberId) {
         return memberRepository.findById(memberId).map(MemberResponseDTO::new);
     }
 
+    // 회원 수정
+    @Transactional
+    public void updateMember(Long id, MemberRequestDTO memberRequestDTO) {
+        MemberEntity memberEntity = memberRepository.findById(id).orElseThrow();
+        memberEntity.update(memberRequestDTO);
+        memberRepository.save(memberEntity);
+    }
+
+    // 회원 삭제
     @Transactional
     public void deleteMember(Long id) {
         memberRepository.deleteById(id);
     }
 
-
+    // 회원 개인 수정
     public MemberResponseDTO findMember(String username) {
         MemberEntity member = memberRepository.findByUsername(username);
 
@@ -74,10 +86,6 @@ public class MemberService {
         return new MemberResponseDTO(member);
     }
 
-    @Transactional
-    public void updateMember(Long id, MemberRequestDTO memberRequestDTO) {
-        MemberEntity memberEntity=memberRepository.findById(id).orElseThrow();
-        memberEntity.update(memberRequestDTO);
-        memberRepository.save(memberEntity);
-    }
+
+
 }
