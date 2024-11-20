@@ -41,10 +41,4 @@ public class CommController {
         return "/comm/rule";
     }
 
-    @RequestMapping("/gameResult")
-    public String result() {
-        return "/comm/gameResult";
-    }
-
-
 }

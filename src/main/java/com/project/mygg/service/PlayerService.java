@@ -61,14 +61,9 @@ public class PlayerService {
         playerRepository.deleteById(id);
     }
 
-    public PlayerResponseDTO findPlayer(String nickname) {
-        PlayerEntity player = playerRepository.findByNickname(nickname);
 
-        if (player == null) {
-            throw new EntityNotFoundException("닉네임이 존재하지 않습니다.");
-        }
-
-        return new PlayerResponseDTO(player);
+    public List<PlayerResponseDTO> findPlayer() {
+        return playerRepository.findAll().stream().map(PlayerResponseDTO::new).collect(Collectors.toList());
     }
 
     // 선수 수정
@@ -81,7 +76,7 @@ public class PlayerService {
 
     // 티어리스트
     public List<PlayerResponseDTO> tierList() {
-        List<PlayerEntity> player = playerRepository.findAllByOrderByTier(); // 정렬된 리스트 가져오기
+        List<PlayerEntity> player = playerRepository.findAllByOrderByTier();
         return player.stream()
                 .map(PlayerResponseDTO::new)
                 .collect(Collectors.toList());

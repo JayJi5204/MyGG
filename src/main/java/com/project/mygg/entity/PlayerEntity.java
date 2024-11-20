@@ -29,8 +29,9 @@ public class PlayerEntity {
     private int penalty;
 
 
-    @OneToMany(mappedBy = "playerEntity", cascade = CascadeType.ALL)
-    private List<ChampionStatsEntity> championStatsEntity = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "result_id")
+    private ResultEntity resultEntity;
 
     public PlayerEntity(PlayerRequestDTO playerRequestDTO) {
         this.nickname = playerRequestDTO.getNickname();

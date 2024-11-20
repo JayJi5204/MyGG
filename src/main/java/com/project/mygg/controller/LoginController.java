@@ -45,22 +45,7 @@ public class LoginController {
         if (result.hasErrors()) {
             return "/login/signUp";
         }
-
-        try {
             memberService.signUp(memberRequestDTO);
-        } catch (IllegalArgumentException e) {
-            String[] errorMessages = e.getMessage().split("\n");
-            for (String message : errorMessages) {
-                if (message.contains("아이디")) {
-                    result.rejectValue("username", "error.username", message);
-                } else if (message.contains("휴대폰 번호")) {
-                    result.rejectValue("phoneNumber", "error.phoneNumber", message);
-                } else if (message.contains("비밀번호")) {
-                    result.rejectValue("checkPassword", "error.checkPassword", message);
-                }
-            }
-            return "/login/signUp";
-        }
 
         return "redirect:/signIn";
     }

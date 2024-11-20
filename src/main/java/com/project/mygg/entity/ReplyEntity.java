@@ -47,8 +47,6 @@ public class ReplyEntity {
         this.replyContent = replyRequestDTO.getReplyContent();
         this.brdId = boardEntity.getId();
         this.replyWriter = memberEntity.getUsername();
-        this.memberEntity = memberEntity;
-        this.boardEntity = boardEntity;
     }
 
 

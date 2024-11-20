@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             return new CustomUserDetails(member);
         }
 
-        throw new UsernameNotFoundException("User not found with username: " + username); // 메시지 수정
+        throw new UsernameNotFoundException("User not found with username: " + username);
     }
 
 }

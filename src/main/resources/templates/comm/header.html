@@ -21,7 +21,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/rule">규칙</a>
                 </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
+                <li class="nav-item">
                     <a class="nav-link" href="/gameResult">경기결과</a>
                 </li>
                 <li class="nav-item">
@@ -31,7 +31,7 @@
                     <a class="nav-link" href="/playerSearch">전적조회</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
-                    <a class="nav-link" href="/resultManage">결과등록</a>
+                    <a class="nav-link" href="/createResult">결과등록</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
                     <a class="nav-link" href="/playerManage">선수관리</a>

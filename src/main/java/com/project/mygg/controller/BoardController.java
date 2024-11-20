@@ -7,6 +7,7 @@ import com.project.mygg.DTO.ReplyDTO.ReplyResponseDTO;
 import com.project.mygg.service.BoardService;
 import com.project.mygg.service.ReplyService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Slice;
@@ -14,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -37,7 +39,10 @@ public class BoardController {
     }
 
     @PostMapping("/createBoard")
-    public String postCreatePage(@ModelAttribute BoardRequestDTO boardRequestDTO) {
+    public String postCreatePage(@Valid @ModelAttribute("board") BoardRequestDTO boardRequestDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return"/board/createBoard";
+        }
         boardService.createBoard(boardRequestDTO);
         return "redirect:/board"; // 메인 페이지로 리다이렉트
     }

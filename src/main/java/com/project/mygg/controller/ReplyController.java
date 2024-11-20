@@ -1,28 +1,27 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.BoardDTO.BoardResponseDTO;
 import com.project.mygg.DTO.ReplyDTO.ReplyRequestDTO;
-import com.project.mygg.DTO.ReplyDTO.ReplyResponseDTO;
-import com.project.mygg.service.BoardService;
 import com.project.mygg.service.ReplyService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Slice;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
 public class ReplyController {
 
     private final ReplyService replyService;
-    private final BoardService boardService;
 
 
     @PostMapping("/board/{id}/createReply")
-    public String postCreateReply(@PathVariable Long id, @ModelAttribute ReplyRequestDTO replyRequestDTO) {
+    public String postCreateReply(@Valid @ModelAttribute("reply") ReplyRequestDTO replyRequestDTO, BindingResult result, @PathVariable Long id) {
+        if (result.hasErrors()) {
+            return "redirect:/board/" + id;
+        }
         replyService.createReply(id, replyRequestDTO);
         return "redirect:/board/" + id;
     }

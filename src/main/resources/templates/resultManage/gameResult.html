@@ -15,20 +15,16 @@
         <thead>
         <tr class="tr_td">
             <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
+            <th>경기일자</th>
         </tr>
         </thead>
         <tbody>
         <tr class="tr_td" th:each="paging : ${paging}">
             <th th:text="${paging.getId()}">번호</th>
             <td>
-                <a th:href="@{/board/{id}(id=${paging.getId()})}" th:text="${paging.getTitle()}">제목</a>
+                <a th:href="@{/gameResult/{id}(id=${paging.getId()})}" th:text="${paging.getResultDate()}">경기일자</a>
             </td>
 
-            <td th:text="${paging.getWriter()}">작성자</td>
-            <td th:text="${#temporals.format(paging.getRegDay(), 'yyyy-MM-dd')}"></td>
         </tr>
         </tbody>
     </table>

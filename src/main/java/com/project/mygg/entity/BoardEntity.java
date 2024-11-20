@@ -49,7 +49,6 @@ public class BoardEntity {
         this.title = boardRequestDTO.getTitle();
         this.content = boardRequestDTO.getContent();
         this.writer = memberEntity.getUsername();
-        this.memberEntity=memberEntity;
     }
 
 

@@ -41,12 +41,12 @@ public class BoardService {
     // 모든 게시글 조회 기능
     public Page<BoardResponseDTO> findBoards(int page) {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC,"id"));
-        return boardRepository.findAll(pageable).map(BoardResponseDTO::new); // 존재하면 DTO로 변환하여 반환
+        return boardRepository.findAll(pageable).map(BoardResponseDTO::new);
     }
 
     // 개별 게시글 조회 기능
     public Optional<BoardResponseDTO> getBoard(Long id) {
-        return boardRepository.findById(id).map(BoardResponseDTO::new); // 존재하면 DTO로 변환하여 반환
+        return boardRepository.findById(id).map(BoardResponseDTO::new);
     }
 
     // 게시글 삭제 기능
