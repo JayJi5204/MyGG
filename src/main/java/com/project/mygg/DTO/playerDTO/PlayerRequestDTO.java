@@ -1,4 +1,4 @@
-package com.project.mygg.DTO.PlayerDTO;
+package com.project.mygg.DTO.playerDTO;
 
 import com.project.mygg.enums.Tier;
 import jakarta.persistence.EnumType;
@@ -18,5 +18,6 @@ public class PlayerRequestDTO {
     @NotNull(message = "티어 선택은 필수입니다.")
     @Enumerated(EnumType.STRING)
     private Tier tier;
-    private int penalty = 0;
+
+    private Long penalty = 0L;
 }

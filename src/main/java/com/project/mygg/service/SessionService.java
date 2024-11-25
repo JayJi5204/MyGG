@@ -12,12 +12,12 @@ import java.util.Iterator;
 public class SessionService {
 
     // 세션 현재 사용자 아이디
-    public String sessionName(){
+    public String sessionName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     // 세션 현재 사용자 role
-    public String sessionRole(){
+    public String sessionRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();

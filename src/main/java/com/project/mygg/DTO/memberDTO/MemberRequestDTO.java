@@ -1,4 +1,4 @@
-package com.project.mygg.DTO.MemberDTO;
+package com.project.mygg.DTO.memberDTO;
 
 import com.project.mygg.enums.Role;
 import jakarta.validation.constraints.NotEmpty;

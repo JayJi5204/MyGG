@@ -1,6 +1,6 @@
 package com.project.mygg.entity;
 
-import com.project.mygg.DTO.BoardDTO.BoardRequestDTO;
+import com.project.mygg.DTO.boardDTO.BoardRequestDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.project.mygg.DTO.PlayerDTO;
+package com.project.mygg.DTO.playerDTO;
 
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.enums.Tier;
@@ -11,7 +11,7 @@ public class PlayerResponseDTO {
     private Long id;
     private String nickname;
     private Tier tier;
-    private int penalty;
+    private Long penalty;
 
     public PlayerResponseDTO(PlayerEntity playerEntity) {
         this.id = playerEntity.getId();

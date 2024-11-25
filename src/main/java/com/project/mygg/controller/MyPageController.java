@@ -1,6 +1,6 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.MemberDTO.MemberResponseDTO;
+import com.project.mygg.DTO.memberDTO.MemberResponseDTO;
 import com.project.mygg.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -17,7 +17,7 @@ public class MyPageController {
     private final MemberService memberService;
 
     @RequestMapping("/myPage")
-    public String myPage(){
+    public String myPage() {
         return "/myPage/myPage";
     }
 

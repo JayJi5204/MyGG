@@ -1,8 +1,7 @@
-package com.project.mygg.DTO.MemberDTO;
+package com.project.mygg.DTO.memberDTO;
 
 import com.project.mygg.entity.MemberEntity;
 import com.project.mygg.enums.Role;
-import com.project.mygg.enums.Tier;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,8 +17,8 @@ public class MemberResponseDTO {
     public MemberResponseDTO(MemberEntity memberEntity) {
         this.id = memberEntity.getId();
         this.username = memberEntity.getUsername();
-        this.name=memberEntity.getName();
-        this.phoneNumber=memberEntity.getPhoneNumber();
+        this.name = memberEntity.getName();
+        this.phoneNumber = memberEntity.getPhoneNumber();
         this.role = memberEntity.getRole();
     }
 }

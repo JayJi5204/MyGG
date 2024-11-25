@@ -1,6 +1,6 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.ReplyDTO.ReplyRequestDTO;
+import com.project.mygg.DTO.replyDTO.ReplyRequestDTO;
 import com.project.mygg.service.ReplyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

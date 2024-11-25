@@ -1,7 +1,5 @@
-package com.project.mygg.DTO.ReplyDTO;
+package com.project.mygg.DTO.replyDTO;
 
-import com.project.mygg.entity.BoardEntity;
-import com.project.mygg.entity.MemberEntity;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;

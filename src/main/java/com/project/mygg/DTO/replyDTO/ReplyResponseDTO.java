@@ -1,4 +1,4 @@
-package com.project.mygg.DTO.ReplyDTO;
+package com.project.mygg.DTO.replyDTO;
 
 import com.project.mygg.entity.ReplyEntity;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class ReplyResponseDTO {
     public ReplyResponseDTO(ReplyEntity replyEntity) {
         this.id = replyEntity.getId();
         this.replyContent = replyEntity.getReplyContent();
-        this.replyWriter= replyEntity.getReplyWriter();
+        this.replyWriter = replyEntity.getReplyWriter();
         this.replyRegDay = replyEntity.getReplyRegDay();
         this.replyModDay = replyEntity.getReplyModDay();
     }

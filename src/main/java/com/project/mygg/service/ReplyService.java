@@ -1,7 +1,7 @@
 package com.project.mygg.service;
 
-import com.project.mygg.DTO.ReplyDTO.ReplyRequestDTO;
-import com.project.mygg.DTO.ReplyDTO.ReplyResponseDTO;
+import com.project.mygg.DTO.replyDTO.ReplyRequestDTO;
+import com.project.mygg.DTO.replyDTO.ReplyResponseDTO;
 import com.project.mygg.entity.BoardEntity;
 import com.project.mygg.entity.MemberEntity;
 import com.project.mygg.entity.ReplyEntity;
@@ -16,8 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

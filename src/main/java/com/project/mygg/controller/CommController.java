@@ -1,7 +1,6 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.PlayerDTO.PlayerResponseDTO;
-import com.project.mygg.enums.Tier;
+import com.project.mygg.DTO.playerDTO.PlayerResponseDTO;
 import com.project.mygg.service.PlayerService;
 import com.project.mygg.service.SessionService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor

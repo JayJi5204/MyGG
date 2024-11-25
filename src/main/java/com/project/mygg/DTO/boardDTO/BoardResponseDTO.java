@@ -1,17 +1,8 @@
-package com.project.mygg.DTO.BoardDTO;
+package com.project.mygg.DTO.boardDTO;
 
 import com.project.mygg.entity.BoardEntity;
-import com.project.mygg.entity.MemberEntity;
-import com.project.mygg.entity.PlayerEntity;
-import com.project.mygg.enums.Tier;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
@@ -35,7 +26,7 @@ public class BoardResponseDTO {
         this.id = boardEntity.getId();
         this.title = boardEntity.getTitle();
         this.content = boardEntity.getContent();
-        this.writer= boardEntity.getWriter();
+        this.writer = boardEntity.getWriter();
         this.regDay = boardEntity.getRegDay();
         this.modDay = boardEntity.getModDay();
     }

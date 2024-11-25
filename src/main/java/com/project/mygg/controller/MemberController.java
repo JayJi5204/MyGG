@@ -1,7 +1,7 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.MemberDTO.MemberRequestDTO;
-import com.project.mygg.DTO.MemberDTO.MemberResponseDTO;
+import com.project.mygg.DTO.memberDTO.MemberRequestDTO;
+import com.project.mygg.DTO.memberDTO.MemberResponseDTO;
 import com.project.mygg.service.MemberService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +45,7 @@ public class MemberController {
     }
 
     @PostMapping("/updateMember/{id}")
-    public String postUpdateMember(@PathVariable Long id, @ModelAttribute("member") MemberRequestDTO memberRequestDTO,RedirectAttributes redirectAttributes) {
+    public String postUpdateMember(@PathVariable Long id, @ModelAttribute("member") MemberRequestDTO memberRequestDTO, RedirectAttributes redirectAttributes) {
         memberService.updateMember(id, memberRequestDTO);
         redirectAttributes.addFlashAttribute("message", "회원이 성공적으로 변경되었습니다.");
         return "redirect:/memberManage";

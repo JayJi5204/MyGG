@@ -25,7 +25,7 @@ public class CustomUserDetails implements UserDetails {
             @Override
             public String getAuthority() {
 
-                return "ROLE_"+ memberEntity.getRole().toString();
+                return "ROLE_" + memberEntity.getRole().toString();
             }
         });
 
@@ -53,6 +53,7 @@ public class CustomUserDetails implements UserDetails {
     public boolean isAccountNonLocked() {
         return true;
     }
+
     // 사용자의 자격이 만료되었는지
     @Override
     public boolean isCredentialsNonExpired() {

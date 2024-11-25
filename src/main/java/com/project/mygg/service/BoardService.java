@@ -1,7 +1,7 @@
 package com.project.mygg.service;
 
-import com.project.mygg.DTO.BoardDTO.BoardRequestDTO;
-import com.project.mygg.DTO.BoardDTO.BoardResponseDTO;
+import com.project.mygg.DTO.boardDTO.BoardRequestDTO;
+import com.project.mygg.DTO.boardDTO.BoardResponseDTO;
 import com.project.mygg.entity.BoardEntity;
 import com.project.mygg.entity.MemberEntity;
 import com.project.mygg.repository.BoardRepository;

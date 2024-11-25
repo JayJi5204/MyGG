@@ -1,11 +1,11 @@
 package com.project.mygg.service;
 
-import com.project.mygg.DTO.PlayerDTO.PlayerRequestDTO;
-import com.project.mygg.DTO.PlayerDTO.PlayerResponseDTO;
+
+import com.project.mygg.DTO.playerDTO.PlayerRequestDTO;
+import com.project.mygg.DTO.playerDTO.PlayerResponseDTO;
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.enums.Tier;
 import com.project.mygg.repository.PlayerRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +41,11 @@ public class PlayerService {
             throw new IllegalArgumentException(errorMessage.toString());
         }
 
-        PlayerEntity player = new PlayerEntity(playerRequestDTO);
+        PlayerEntity player = PlayerEntity.builder()
+                .nickname(playerRequestDTO.getNickname())
+                .tier(playerRequestDTO.getTier())
+                .penalty(playerRequestDTO.getPenalty())
+                .build();
         playerRepository.save(player);
     }
 
@@ -51,7 +56,7 @@ public class PlayerService {
     }
 
     // 선수 개별 조회
-    public Optional<PlayerResponseDTO> findOne(Long playerInd) {
+    public Optional<PlayerResponseDTO> findPlayer(Long playerInd) {
         return playerRepository.findById(playerInd).map(PlayerResponseDTO::new);
     }
 
@@ -61,10 +66,6 @@ public class PlayerService {
         playerRepository.deleteById(id);
     }
 
-
-    public List<PlayerResponseDTO> findPlayer() {
-        return playerRepository.findAll().stream().map(PlayerResponseDTO::new).collect(Collectors.toList());
-    }
 
     // 선수 수정
     @Transactional

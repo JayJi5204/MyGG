@@ -1,6 +1,6 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.MemberDTO.MemberRequestDTO;
+import com.project.mygg.DTO.memberDTO.MemberRequestDTO;
 import com.project.mygg.service.MemberService;
 import com.project.mygg.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,7 +45,7 @@ public class LoginController {
         if (result.hasErrors()) {
             return "/login/signUp";
         }
-            memberService.signUp(memberRequestDTO);
+        memberService.signUp(memberRequestDTO);
 
         return "redirect:/signIn";
     }

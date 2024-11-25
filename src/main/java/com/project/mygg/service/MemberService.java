@@ -1,7 +1,7 @@
 package com.project.mygg.service;
 
-import com.project.mygg.DTO.MemberDTO.MemberRequestDTO;
-import com.project.mygg.DTO.MemberDTO.MemberResponseDTO;
+import com.project.mygg.DTO.memberDTO.MemberRequestDTO;
+import com.project.mygg.DTO.memberDTO.MemberResponseDTO;
 import com.project.mygg.entity.MemberEntity;
 import com.project.mygg.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -85,7 +84,6 @@ public class MemberService {
 
         return new MemberResponseDTO(member);
     }
-
 
 
 }

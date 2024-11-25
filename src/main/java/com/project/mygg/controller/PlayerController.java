@@ -1,7 +1,7 @@
 package com.project.mygg.controller;
 
-import com.project.mygg.DTO.PlayerDTO.PlayerRequestDTO;
-import com.project.mygg.DTO.PlayerDTO.PlayerResponseDTO;
+import com.project.mygg.DTO.playerDTO.PlayerRequestDTO;
+import com.project.mygg.DTO.playerDTO.PlayerResponseDTO;
 import com.project.mygg.service.PlayerService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -59,7 +59,7 @@ public class PlayerController {
 
     @GetMapping("/updatePlayer/{id}")
     public String getUpdatePlayer(@PathVariable Long id, Model model) {
-        PlayerResponseDTO playerResponseDTO = playerService.findOne(id)
+        PlayerResponseDTO playerResponseDTO = playerService.findPlayer(id)
                 .orElseThrow(() -> new EntityNotFoundException("선수를 찾을 수 없습니다."));
         model.addAttribute("player", playerResponseDTO);
         return "/playerManage/updatePlayer";
