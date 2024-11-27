@@ -6,6 +6,7 @@ import com.project.mygg.DTO.playerDTO.PlayerResponseDTO;
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.enums.Tier;
 import com.project.mygg.repository.PlayerRepository;
+import com.project.mygg.repository.StatsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,8 @@ import java.util.stream.Collectors;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+
+    private final StatsRepository statsRepository;
 
     // 선수 추가
     @Transactional
@@ -60,6 +63,10 @@ public class PlayerService {
         return playerRepository.findById(playerInd).map(PlayerResponseDTO::new);
     }
 
+    public List<PlayerResponseDTO> findPlayer() {
+        return playerRepository.findAll().stream().map(PlayerResponseDTO::new).collect(Collectors.toList());
+    }
+
     // 선수 삭제
     @Transactional
     public void deletePlayer(Long id) {
@@ -82,5 +89,6 @@ public class PlayerService {
                 .map(PlayerResponseDTO::new)
                 .collect(Collectors.toList());
     }
+
 
 }

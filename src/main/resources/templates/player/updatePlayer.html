@@ -35,10 +35,10 @@
         </div>
         <div class="form-group">
             <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
-            <label for="penalty">닉네임</label>
-            <input class="form-control" id="penalty" name="nickname" placeholder="벌점을 입력하세요"
+            <label for="penalty">벌점</label>
+            <input class="form-control" id="penalty" name="penalty" placeholder="벌점을 입력하세요"
                    th:class="${#fields.hasErrors('penalty')}? 'form-control fieldError' : 'form-control'"
-                   th:field="*{nickname}"
+                   th:field="*{penalty}"
                    type="text">
             <p th:errors="*{penalty}" th:if="${#fields.hasErrors('penalty')}" class="error">오류 메세지</p>
         </div>

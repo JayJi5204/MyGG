@@ -30,7 +30,7 @@ public class PlayerEntity {
     private Long penalty;
 
     @OneToMany(mappedBy = "playerEntity", cascade = CascadeType.ALL)
-    private List<MatchEntity> matchEntity = new ArrayList<>();
+    private List<StatsEntity> statsEntity = new ArrayList<>();
 
     @Builder
     public PlayerEntity(String nickname, Tier tier, Long penalty) {
@@ -43,10 +43,7 @@ public class PlayerEntity {
     public void update(PlayerRequestDTO playerRequestDTO) {
         this.nickname = playerRequestDTO.getNickname();
         this.tier = playerRequestDTO.getTier();
+        this.penalty = playerRequestDTO.getPenalty();
     }
 
-    // enum값 정수로 변환
-    public int getTierValue() {
-        return this.tier.getValue();
-    }
 }

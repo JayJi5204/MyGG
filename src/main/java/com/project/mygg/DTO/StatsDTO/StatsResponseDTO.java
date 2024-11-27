@@ -1,4 +1,4 @@
-package com.project.mygg.DTO.StatsDTO;
+package com.project.mygg.DTO.statsDTO;
 
 import com.project.mygg.entity.StatsEntity;
 import com.project.mygg.enums.ChampionName;
@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class StatsResponseDTO {
+
+
+    private String nickname;
 
     private ChampionName championName;
 
@@ -26,6 +29,7 @@ public class StatsResponseDTO {
 
 
     public StatsResponseDTO(StatsEntity statsEntity) {
+        this.nickname = statsEntity.getNickname();
         this.championName = statsEntity.getChampionName();
         this.line = statsEntity.getLine();
         this.win = statsEntity.getWin();

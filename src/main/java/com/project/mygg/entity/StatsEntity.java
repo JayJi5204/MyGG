@@ -4,23 +4,21 @@ package com.project.mygg.entity;
 import com.project.mygg.enums.ChampionName;
 import com.project.mygg.enums.Line;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @Entity
-@Table(name = "stats_entity")
+@Table(name = "match_entity")
 @NoArgsConstructor
 public class StatsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stats_id")
+    @Column(name = "match_id")
     private Long id;
+
+    private String nickname;
 
     @Enumerated(EnumType.STRING)
     private ChampionName championName;
@@ -38,18 +36,27 @@ public class StatsEntity {
 
     private Long assist;
 
-    @OneToMany(mappedBy = "statsEntity", cascade = CascadeType.ALL)
-    private List<MatchEntity> matchEntityArrayList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "player_id")
+    private PlayerEntity playerEntity;
 
 
-    @Builder
-    public StatsEntity(ChampionName championName, Line line, Long win, Long lose, Long kill, Long death, Long assist) {
+    public StatsEntity(PlayerEntity playerEntity,String nickname, ChampionName championName, Line line, Long kill, Long death, Long assist) {
+        this.playerEntity=playerEntity;
+        this.nickname = nickname;
         this.championName = championName;
         this.line = line;
-        this.win = win;
-        this.lose = lose;
         this.kill = kill;
         this.death = death;
         this.assist = assist;
     }
+
+    public StatsEntity(PlayerEntity playerEntity, ChampionName championName, Long kill, Long death, Long assist) {
+        this.playerEntity = playerEntity;
+        this.championName = championName;
+        this.kill = kill;
+        this.death = death;
+        this.assist = assist;
+    }
+
 }

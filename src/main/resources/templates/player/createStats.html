@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>선수 수정</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/item.css" rel="stylesheet" type="text/css">
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
+</head>
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
+<body>
+<div class="container">
+    <h1>Create Match</h1>
+    <!-- 폼 시작 -->
+    <form method="post" th:action="@{/createStats}" th:object="${match}">
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <div class="alert alert-danger" role="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+                <label for="nickname">닉네임</label>
+                <select class="form-control" id="nickName" name="nickname" th:field="*{nickname}">
+                    <option value="">닉네임</option>
+                    <option th:each="player : ${player}"
+                            th:text="${player.nickname}"
+                            th:value="${player.id}"></option>
+                </select>
+                <p class="error" th:errors="*{nickname}" th:if="${#fields.hasErrors('nickname')}">오류 메세지</p>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="championName">챔피언</label>
+                <select class="form-control" id="championName" name="championName" th:field="*{championName}">
+                    <option value="">챔피언</option>
+                    <option th:each="championName : ${T(com.project.mygg.enums.ChampionName).values()}"
+                            th:text="${championName.korean}"
+                            th:value="${championName}"></option>
+                </select>
+                <p class="error" th:errors="*{championName}" th:if="${#fields.hasErrors('championName')}">오류 메세지</p>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="line">챔피언</label>
+                <select class="form-control" id="line" name="line" th:field="*{line}">
+                    <option value="">챔피언</option>
+                    <option th:each="line : ${T(com.project.mygg.enums.Line).values()}"
+                            th:text="${line}"
+                            th:value="${line}"></option>
+                </select>
+                <p class="error" th:errors="*{championName}" th:if="${#fields.hasErrors('championName')}">오류 메세지</p>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="kill">킬</label>
+                <input class="form-control" id="kill" name="kill"
+                       th:class="${#fields.hasErrors('kill')}? 'form-control fieldError' : 'form-control'"
+                       th:field="*{kill}"
+                       type="number">
+                <p class="error" th:errors="*{kill}" th:if="${#fields.hasErrors('kill')}">오류 메세지</p>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="death">데스</label>
+                <input class="form-control" id="death" name="death"
+                       th:class="${#fields.hasErrors('death')}? 'form-control fieldError' : 'form-control'"
+                       th:field="*{death}"
+                       type="number">
+                <p class="error" th:errors="*{death}" th:if="${#fields.hasErrors('death')}">오류 메세지</p>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="assist">어시스트</label>
+                <input class="form-control" id="assist" name="assist"
+                       th:class="${#fields.hasErrors('assist')}? 'form-control fieldError' : 'form-control'"
+                       th:field="*{assist}"
+                       type="number">
+                <p class="error" th:errors="*{assist}" th:if="${#fields.hasErrors('assist')}">오류 메세지</p>
+            </div>
+            <!--            <div class="form-group col-md-1" hidden="hidden">-->
+            <!--                <label for="winOrLose">승/패</label>-->
+            <!--                <select class="form-control" id="winOrLose" name="winOrLose" th:field="*{winOrLose}">-->
+            <!--                    <option value="">승/패</option>-->
+            <!--                    <option th:each="winOrLose : ${T(com.project.mygg.enums.WinOrLose).values()}"-->
+            <!--                            th:text="${winOrLose}"-->
+            <!--                            th:value="${winOrLose}"></option>-->
+            <!--                </select>-->
+            <!--            </div>-->
+        </div>
+
+        <!-- 폼 제출 버튼 -->
+        <button class="btn btn-primary" type="submit">등록 완료</button>
+        <a class="btn btn-danger" role="button" th:href="@{/}">취소</a>
+    </form>
+</div>
+</body>
+<!--푸터위치-->
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>

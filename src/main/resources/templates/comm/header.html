@@ -22,22 +22,22 @@
                     <a class="nav-link" href="/rule">규칙</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/gameResult">경기결과</a>
+                    <a class="nav-link" href="/searchPlayer/test">경기 결과</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/board">게시판</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/playerSearch">전적조회</a>
+                    <a class="nav-link" href="/searchPlayer">선수 정보 조회</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
-                    <a class="nav-link" href="/createMatch">결과등록</a>
+                    <a class="nav-link" href="/createStats">선수 정보 등록</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
-                    <a class="nav-link" href="/playerManage">선수관리</a>
+                    <a class="nav-link" href="/playerManage">선수 관리</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
-                    <a class="nav-link" href="/memberManage">회원관리</a>
+                    <a class="nav-link" href="/memberManage">회원 관리</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/logout">로그아웃</a>

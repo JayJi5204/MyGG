@@ -77,4 +77,14 @@ public class BoardService {
         boardRepository.save(boardEntity);
     }
 
+    public Page<BoardResponseDTO> searchBoard(String option,String keyword,int page){
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC,"id"));
+        if("title".equals(option)){
+        return boardRepository.findByTitleContaining(keyword,pageable).map(BoardResponseDTO::new);
+        }else {
+
+        return boardRepository.findByContentContaining(keyword,pageable).map(BoardResponseDTO::new);
+        }
+    }
+
 }

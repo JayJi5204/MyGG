@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @Log4j2
@@ -22,23 +24,23 @@ public class PlayerController {
     private final PlayerService playerService;
 
     @GetMapping("/playerManage")
-    public String getMemberList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+    public String getMemberList(String nickname,Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
         Page<PlayerResponseDTO> paging = playerService.findPlayers(page);
         model.addAttribute("paging", paging);
-        return "/playerManage/playerManage";
+        return "/player/playerManage";
     }
 
     // 선수등록 기능
     @GetMapping("/addPlayer")
     public String getAddPlayer(Model model) {
         model.addAttribute("player", new PlayerRequestDTO());
-        return "/playerManage/addPlayer";
+        return "/player/addPlayer";
     }
 
     @PostMapping("/addPlayer")
     public String postAddPlayer(@Valid @ModelAttribute("player") PlayerRequestDTO playerRequestDTO, BindingResult result) {
         if (result.hasErrors()) {
-            return "/playerManage/addPlayer";
+            return "/player/addPlayer";
         }
         try {
             playerService.addPlayer(playerRequestDTO);
@@ -51,7 +53,7 @@ public class PlayerController {
                     result.rejectValue("tier", "error.tier", message);
                 }
             }
-            return "/playerManage/addPlayer";
+            return "/player/addPlayer";
         }
 
         return "redirect:/playerManage";
@@ -62,7 +64,7 @@ public class PlayerController {
         PlayerResponseDTO playerResponseDTO = playerService.findPlayer(id)
                 .orElseThrow(() -> new EntityNotFoundException("선수를 찾을 수 없습니다."));
         model.addAttribute("player", playerResponseDTO);
-        return "/playerManage/updatePlayer";
+        return "/player/updatePlayer";
     }
 
     @PostMapping("/updatePlayer/{id}")
@@ -89,5 +91,7 @@ public class PlayerController {
         }
         return "redirect:/playerManage";
     }
+
+
 
 }

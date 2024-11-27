@@ -26,9 +26,14 @@ public class BoardController {
     private final ReplyService replyService;
 
     @GetMapping("/board")
-    public String getBoardList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
-        Page<BoardResponseDTO> paging = boardService.findBoards(page);
-        model.addAttribute("paging", paging);
+    public String getBoardList(String option, String keyword, Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+        if (keyword != null) {
+            Page<BoardResponseDTO> searchBoard = boardService.searchBoard(option, keyword, page);
+            model.addAttribute("paging", searchBoard);
+        } else {
+            Page<BoardResponseDTO> paging = boardService.findBoards(page);
+            model.addAttribute("paging", paging);
+        }
 
         return "/board/board";
     }
@@ -86,5 +91,6 @@ public class BoardController {
         boardService.deleteBoard(id);
         return "redirect:/board"; // 삭제 후 메인 페이지로 리다이렉트
     }
+
 
 }
