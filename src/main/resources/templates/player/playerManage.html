@@ -25,7 +25,7 @@
                 <th>벌점</th>
                 <th></th>
                 <th></th>
-                <th>선수 수정/삭제</th>
+                <th>선수 스탯/수정/삭제</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +39,7 @@
                 <td></td>
                 <td></td>
                 <td>
+                    <a class="btn btn-success" th:href="@{/createStats/{id}(id=${paging.id})}" role="button">선수 스탯</a>
                     <a class="btn btn-primary" th:href="@{/updatePlayer/{id}(id=${paging.id})}" role="button">선수 수정</a>
                     <form th:action="@{/deletePlayer/{id}(id=${paging.id})}" method="post" onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;">
                         <button class="btn btn-danger" type="submit">선수 삭제</button>

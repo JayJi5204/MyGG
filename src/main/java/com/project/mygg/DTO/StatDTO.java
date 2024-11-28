@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StatsDTO {
+public class StatDTO {
     private ChampionName championName;
    private Line line;
     private Long Kill;

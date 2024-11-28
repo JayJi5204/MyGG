@@ -12,10 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StatsRequestDTO {
 
-
-    @NotEmpty(message = "플레이어 이름은 필수입니다.")
-    private String nickname;
-
     @NotNull(message = "챔피언 이름은 필수입니다.")
     private ChampionName championName;
 
@@ -30,8 +26,6 @@ public class StatsRequestDTO {
 
     @NotNull(message = "어시스트수는 필수입니다.")
     private Long assist;
-
-    private PlayerEntity playerEntity;
 
 
 }

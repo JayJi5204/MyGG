@@ -31,9 +31,6 @@
                     <a class="nav-link" href="/searchPlayer">선수 정보 조회</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
-                    <a class="nav-link" href="/createStats">선수 정보 등록</a>
-                </li>
-                <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
                     <a class="nav-link" href="/playerManage">선수 관리</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">

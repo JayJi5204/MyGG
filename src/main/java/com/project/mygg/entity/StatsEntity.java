@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "match_entity")
+@Table(name = "stats_entity")
 @NoArgsConstructor
 public class StatsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "match_id")
+    @Column(name = "stats_id")
     private Long id;
 
     private String nickname;
@@ -41,9 +41,8 @@ public class StatsEntity {
     private PlayerEntity playerEntity;
 
 
-    public StatsEntity(PlayerEntity playerEntity,String nickname, ChampionName championName, Line line, Long kill, Long death, Long assist) {
+    public StatsEntity(PlayerEntity playerEntity,ChampionName championName, Line line, Long kill, Long death, Long assist) {
         this.playerEntity=playerEntity;
-        this.nickname = nickname;
         this.championName = championName;
         this.line = line;
         this.kill = kill;

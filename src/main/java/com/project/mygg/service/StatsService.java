@@ -1,7 +1,7 @@
 package com.project.mygg.service;
 
 import com.project.mygg.DTO.KdaDTO;
-import com.project.mygg.DTO.StatsDTO;
+import com.project.mygg.DTO.StatDTO;
 import com.project.mygg.DTO.statsDTO.StatsRequestDTO;
 import com.project.mygg.DTO.statsDTO.StatsResponseDTO;
 import com.project.mygg.entity.PlayerEntity;
@@ -29,11 +29,11 @@ public class StatsService {
 
 
     @Transactional
-    public void createStats(StatsRequestDTO statsRequestDTO) {
+    public void createStats(Long playerId,StatsRequestDTO statsRequestDTO) {
+        PlayerEntity playerEntity=playerRepository.findById(playerId).orElseThrow();
         // 생성자를 사용하여 GameResultEntity 객체 생성
         StatsEntity statsEntity = new StatsEntity(
-                statsRequestDTO.getPlayerEntity(),
-                statsRequestDTO.getNickname(),
+                playerEntity,
                 statsRequestDTO.getChampionName(),
                 statsRequestDTO.getLine(),
                 statsRequestDTO.getKill(),
@@ -48,7 +48,7 @@ public class StatsService {
 
     @Transactional
     public Page<StatsResponseDTO> searchPlayer(String nickname, int page) {
-        Pageable pageable = PageRequest.of(page, 100, Sort.by(Sort.Direction.DESC, "id"));
+        Pageable pageable = PageRequest.of(page, 100, Sort.by(Sort.Direction.ASC, "id"));
         return statsRepository.findByNicknameContaining(nickname, pageable).map(StatsResponseDTO::new);
     }
 
@@ -57,8 +57,8 @@ public class StatsService {
         return statsRepository.findTotalKdaByPlayer(playerId);
     }
 
-    public List<StatsDTO> TotalKda(Long playerId) {
-        return statsRepository.findStatsRequestDTOByPlayer(playerId);
+    public List<StatDTO> TotalKda(Long playerId) {
+        return statsRepository.findStatDTOByPlayerId(playerId);
     }
 
 

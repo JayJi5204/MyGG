@@ -1,7 +1,7 @@
 package com.project.mygg.controller;
 
 import com.project.mygg.DTO.KdaDTO;
-import com.project.mygg.DTO.StatsDTO;
+import com.project.mygg.DTO.StatDTO;
 import com.project.mygg.DTO.playerDTO.PlayerResponseDTO;
 import com.project.mygg.DTO.statsDTO.StatsRequestDTO;
 import com.project.mygg.DTO.statsDTO.StatsResponseDTO;
@@ -27,51 +27,53 @@ public class StatsController {
     private final StatsService statsService;
     private final PlayerService playerService;
 
-    @GetMapping("/createStats")
-    public String getCreateStats(Model model) {
+    @GetMapping("/createStats/{playerId}")
+    public String getCreateStats(@PathVariable Long playerId,Model model) {
         List<PlayerResponseDTO> player = playerService.findPlayer();
         model.addAttribute("player", player);
+        model.addAttribute("playerId", playerId);
         model.addAttribute("match", new StatsRequestDTO());
 
         return "/player/createStats";
     }
 
 
-    @PostMapping("/createStats")
+    @PostMapping("/createStats/{playerId}")
     public String postCreateStats(@Valid @ModelAttribute("match") StatsRequestDTO statsRequestDTO, BindingResult result
-            , Model model) {
+            , @PathVariable Long playerId, Model model) {
 
+        model.addAttribute("playerId", playerId);
         if (result.hasErrors()) {
             List<PlayerResponseDTO> player = playerService.findPlayer();
             model.addAttribute("player", player);
             return "/player/createStats";
         }
         try {
+            model.addAttribute("playerId", playerId);
             statsService.
-                    createStats(statsRequestDTO);
+                    createStats(playerId, statsRequestDTO);
         } catch (IllegalArgumentException e) {
 
             return "/player/createStats";
         }
 
-        return "redirect:/searchPlayer/test";
+        return "redirect:/searchPlayer";
 
     }
 
 
     @GetMapping("/searchPlayer")
-    public String getSearchPlayer(@RequestParam(value = "playerId", required = false) Long playerId, Model model) {
+    public String getSearchPlayer(Long playerId, Model model) {
         log.info("playerId: " + playerId);
         if (playerId != null) {
-            List<StatsDTO> searchPlayer = statsService.TotalKda(playerId);
+            List<StatDTO> searchPlayer = statsService.TotalKda(playerId);
             List<PlayerResponseDTO> player = playerService.findPlayer();
             model.addAttribute("player", player);
             model.addAttribute("search", searchPlayer);
-            log.info("playerId1 : " + player);
+            log.info("playerId1 : " + searchPlayer);
         } else {
             List<PlayerResponseDTO> player = playerService.findPlayer();
             model.addAttribute("player", player);
-            log.info("playerId2 : " + player);
         }
         return "/player/searchPlayer";
     }
@@ -99,7 +101,7 @@ public class StatsController {
     }
 
     @GetMapping("/match")
-    public String showMatchForm( Model model) {
+    public String showMatchForm(Model model) {
         model.addAttribute("championName", ChampionName.values());
         model.addAttribute("statsRequestDTO", new StatsRequestDTO());
         return "/player/createStats2";
