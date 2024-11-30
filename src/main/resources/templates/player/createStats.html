@@ -17,7 +17,8 @@
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="championName">챔피언</label>
-                <select class="form-control" id="championName" name="championName" th:field="*{championName}">
+                <select th:class="${#fields.hasErrors('championName')}? 'form-control fieldError' : 'form-control'"
+                        id="championName" name="championName" th:field="*{championName}">
                     <option value="">챔피언</option>
                     <option th:each="championName : ${T(com.project.mygg.enums.ChampionName).values()}"
                             th:text="${championName.korean}"
@@ -27,7 +28,8 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="line">라인</label>
-                <select class="form-control" id="line" name="line" th:field="*{line}">
+                <select th:class="${#fields.hasErrors('line')}? 'form-control fieldError' : 'form-control'"
+                        id="line" name="line" th:field="*{line}">
                     <option value="">라인</option>
                     <option th:each="line : ${T(com.project.mygg.enums.Line).values()}"
                             th:text="${line}"
@@ -35,7 +37,7 @@
                 </select>
                 <p class="error" th:errors="*{championName}" th:if="${#fields.hasErrors('championName')}">오류 메세지</p>
             </div>
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-2">
                 <label for="kill">킬</label>
                 <input class="form-control" id="kill" name="kill"
                        th:class="${#fields.hasErrors('kill')}? 'form-control fieldError' : 'form-control'"
@@ -43,7 +45,7 @@
                        type="number">
                 <p class="error" th:errors="*{kill}" th:if="${#fields.hasErrors('kill')}">오류 메세지</p>
             </div>
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-2">
                 <label for="death">데스</label>
                 <input class="form-control" id="death" name="death"
                        th:class="${#fields.hasErrors('death')}? 'form-control fieldError' : 'form-control'"
@@ -51,7 +53,7 @@
                        type="number">
                 <p class="error" th:errors="*{death}" th:if="${#fields.hasErrors('death')}">오류 메세지</p>
             </div>
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-2">
                 <label for="assist">어시스트</label>
                 <input class="form-control" id="assist" name="assist"
                        th:class="${#fields.hasErrors('assist')}? 'form-control fieldError' : 'form-control'"
@@ -59,20 +61,22 @@
                        type="number">
                 <p class="error" th:errors="*{assist}" th:if="${#fields.hasErrors('assist')}">오류 메세지</p>
             </div>
-            <!--            <div class="form-group col-md-1" hidden="hidden">-->
-            <!--                <label for="winOrLose">승/패</label>-->
-            <!--                <select class="form-control" id="winOrLose" name="winOrLose" th:field="*{winOrLose}">-->
-            <!--                    <option value="">승/패</option>-->
-            <!--                    <option th:each="winOrLose : ${T(com.project.mygg.enums.WinOrLose).values()}"-->
-            <!--                            th:text="${winOrLose}"-->
-            <!--                            th:value="${winOrLose}"></option>-->
-            <!--                </select>-->
-            <!--            </div>-->
+            <div class="form-group col-md-2">
+                <label for="winOrLose">승/패</label>
+                <select th:class="${#fields.hasErrors('winOrLose')}? 'form-control fieldError' : 'form-control'"
+                        id="winOrLose" name="winOrLose" th:field="*{winOrLose}">
+                    <option value="">승/패</option>
+                    <option th:each="winOrLose : ${T(com.project.mygg.enums.WinOrLose).values()}"
+                            th:text="${winOrLose}"
+                            th:value="${winOrLose}"></option>
+                </select>
+                <p class="error" th:errors="*{winOrLose}" th:if="${#fields.hasErrors('winOrLose')}">오류 메세지</p>
+            </div>
         </div>
 
         <!-- 폼 제출 버튼 -->
         <button class="btn btn-primary" type="submit">등록 완료</button>
-        <a class="btn btn-danger" role="button" th:href="@{/}">취소</a>
+        <a class="btn btn-danger" role="button" th:href="@{/playerManage}">취소</a>
     </form>
 </div>
 </body>

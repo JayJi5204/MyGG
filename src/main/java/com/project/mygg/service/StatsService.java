@@ -7,6 +7,7 @@ import com.project.mygg.DTO.statsDTO.StatsResponseDTO;
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.entity.StatsEntity;
 import com.project.mygg.enums.ChampionName;
+import com.project.mygg.enums.WinOrLose;
 import com.project.mygg.repository.PlayerRepository;
 import com.project.mygg.repository.StatsRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,16 +32,22 @@ public class StatsService {
     @Transactional
     public void createStats(Long playerId,StatsRequestDTO statsRequestDTO) {
         PlayerEntity playerEntity=playerRepository.findById(playerId).orElseThrow();
+
+        Long win = statsRequestDTO.getWinOrLose() == WinOrLose.WIN ? 1L : 0L;
+        Long lose = statsRequestDTO.getWinOrLose() == WinOrLose.LOSE ? 1L : 0L;
         // 생성자를 사용하여 GameResultEntity 객체 생성
         StatsEntity statsEntity = new StatsEntity(
                 playerEntity,
                 statsRequestDTO.getChampionName(),
                 statsRequestDTO.getLine(),
+                win,
+                lose,
                 statsRequestDTO.getKill(),
                 statsRequestDTO.getDeath(),
                 statsRequestDTO.getAssist()
 
         );
+
 
         statsRepository.save(statsEntity);
 

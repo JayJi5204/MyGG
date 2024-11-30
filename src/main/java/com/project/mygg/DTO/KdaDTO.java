@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class KdaDTO {
-    private ChampionName championName;
+    private Long totalWin;
+    private Long totalLose;
     private Long totalKill;
     private Long totalDeath;
     private Long totalAssist;

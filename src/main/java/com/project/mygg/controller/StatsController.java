@@ -68,6 +68,8 @@ public class StatsController {
         if (playerId != null) {
             List<StatDTO> searchPlayer = statsService.TotalKda(playerId);
             List<PlayerResponseDTO> player = playerService.findPlayer();
+            List<KdaDTO> kdaList = statsService.getTotalKda(playerId);
+            model.addAttribute("kdaList", kdaList);
             model.addAttribute("player", player);
             model.addAttribute("search", searchPlayer);
             log.info("playerId1 : " + searchPlayer);

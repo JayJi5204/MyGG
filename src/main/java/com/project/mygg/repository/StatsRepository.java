@@ -17,12 +17,12 @@ public interface StatsRepository extends JpaRepository<StatsEntity, Long> {
 
     Page<StatsEntity> findByNicknameContaining(String nickname, Pageable pageable);
 
-    @Query("SELECT new com.project.mygg.DTO.KdaDTO(s.championName, SUM(s.kill),SUM(s.death),SUM(s.assist))" +
-            "FROM StatsEntity s WHERE s.playerEntity.id= :playerId GROUP BY s.championName"
+    @Query("SELECT new com.project.mygg.DTO.KdaDTO(SUM(s.win),SUM(s.lose),SUM(s.kill),SUM(s.death),SUM(s.assist))" +
+            "FROM StatsEntity s WHERE s.playerEntity.id= :playerId "
     )
     List<KdaDTO> findTotalKdaByPlayer(@Param("playerId") Long playerId);
 
-    @Query("SELECT new com.project.mygg.DTO.StatDTO(s.championName,s.line, SUM(s.kill), SUM(s.death), SUM(s.assist))" +
+    @Query("SELECT new com.project.mygg.DTO.StatDTO(s.championName,s.line,SUM(s.win),SUM(s.lose), SUM(s.kill), SUM(s.death), SUM(s.assist))" +
             "FROM StatsEntity s WHERE s.playerEntity.id= :playerId GROUP BY s.championName, s.line"
     )
     List<StatDTO> findStatDTOByPlayerId(@Param("playerId") Long playerId);

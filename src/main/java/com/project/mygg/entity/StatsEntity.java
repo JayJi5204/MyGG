@@ -41,10 +41,12 @@ public class StatsEntity {
     private PlayerEntity playerEntity;
 
 
-    public StatsEntity(PlayerEntity playerEntity,ChampionName championName, Line line, Long kill, Long death, Long assist) {
+    public StatsEntity(PlayerEntity playerEntity,ChampionName championName, Line line,Long win,Long lose, Long kill, Long death, Long assist) {
         this.playerEntity=playerEntity;
         this.championName = championName;
         this.line = line;
+        this.win=win;
+        this.lose=lose;
         this.kill = kill;
         this.death = death;
         this.assist = assist;

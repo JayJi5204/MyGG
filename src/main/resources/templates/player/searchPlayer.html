@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>임시 페이지</title>
+    <title>선수 정보 조회</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/comm.css" rel="stylesheet" type="text/css">
 </head>
@@ -29,6 +29,34 @@
             </div>
         </div>
     </form>
+    <table class="table">
+        <thead>
+        <tr class="tr_td">
+            <th>총 승리</th>
+            <th>총 패배</th>
+            <th>총 승률</th>
+            <th>총 킬</th>
+            <th>총 데스</th>
+            <th>총 어시스트</th>
+            <th>총 KDA</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="tr_td" th:each="search : ${kdaList}">
+            <th th:text="${search.totalWin}">총 승리</th>
+            <th th:text="${search.totalLose}">총 패배</th>
+            <th th:text="${search.totalLose > 0 ? #numbers.formatDecimal(search.totalWin / ((search.totalWin + search.totalLose) * 1.0) * 100.0, 1, 2) +'%' : '100%'}">
+                승률
+            </th>
+            <th th:text="${search.totalKill}">총 킬</th>
+            <th th:text="${search.totalDeath}">총 데스</th>
+            <th th:text="${search.totalAssist}">총 어시스트</th>
+            <th th:text="${search.totalDeath == 0 ? #numbers.formatDecimal((search.totalKill + search.totalAssist) / 1.0, 1, 2) : #numbers.formatDecimal((search.totalKill + search.totalAssist) / (search.totalDeath * 1.0), 1, 2)}">
+                KDA
+            </th>
+        </tr>
+        </tbody>
+    </table>
 
     <table class="table">
         <thead>
@@ -48,13 +76,18 @@
         <tr class="tr_td" th:each="search : ${search}">
             <th th:text="${search.championName.korean}">챔피언</th>
             <th th:text="${search.line}">라인</th>
-            <th>승</th>
-            <th>패</th>
-            <th>승률</th>
+            <th th:text="${search.win}">승</th>
+            <th th:text="${search.lose}">패</th>
+            <th th:text="${search.lose > 0 ? #numbers.formatDecimal(search.win / ((search.win + search.lose) * 1.0) * 100.0, 1, 2) +'%' : '100%'}">
+                승률
+            </th>
+
             <th th:text="${search.kill}">킬</th>
             <th th:text="${search.death}">데스</th>
             <th th:text="${search.assist}">어시스트</th>
-            <th th:text="${search.death > 0 ? #numbers.formatDecimal((search.kill + search.assist) / (search.death * 1.0), 1, 2) : 'Infinity'}">KDA</th>
+            <th th:text="${search.death == 0 ? #numbers.formatDecimal((search.kill + search.assist) / 1.0, 1, 2) : #numbers.formatDecimal((search.kill + search.assist) / (search.death * 1.0), 1, 2)}">
+                KDA
+            </th>
         </tr>
         </tbody>
     </table>

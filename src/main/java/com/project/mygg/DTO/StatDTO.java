@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StatDTO {
     private ChampionName championName;
-   private Line line;
+    private Line line;
+    private Long win;
+    private Long lose;
     private Long Kill;
     private Long Death;
     private Long Assist;

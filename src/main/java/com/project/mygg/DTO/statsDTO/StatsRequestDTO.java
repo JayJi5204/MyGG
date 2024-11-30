@@ -3,6 +3,7 @@ package com.project.mygg.DTO.statsDTO;
 import com.project.mygg.entity.PlayerEntity;
 import com.project.mygg.enums.ChampionName;
 import com.project.mygg.enums.Line;
+import com.project.mygg.enums.WinOrLose;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -17,6 +18,9 @@ public class StatsRequestDTO {
 
     @NotNull(message = "라인은 필수입니다.")
     private Line line;
+
+    @NotNull(message = "승패는 필수입니다.")
+    private WinOrLose winOrLose;
 
     @NotNull(message = "킬수는 필수입니다.")
     private Long kill;
