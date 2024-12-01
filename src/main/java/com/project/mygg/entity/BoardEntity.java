@@ -52,7 +52,7 @@ public class BoardEntity {
     }
 
 
-    public void updateBoard(BoardRequestDTO boardRequestDTO) {
+    public void updateBoard(BoardRequestDTO boardRequestDTO,MemberEntity memberEntity) {
         this.title = boardRequestDTO.getTitle();
         this.content = boardRequestDTO.getContent();
         this.writer = memberEntity.getUsername();

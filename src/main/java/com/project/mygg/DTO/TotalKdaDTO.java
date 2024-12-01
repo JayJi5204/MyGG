@@ -1,6 +1,5 @@
 package com.project.mygg.DTO;
 
-import com.project.mygg.enums.ChampionName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class KdaDTO {
+public class TotalKdaDTO {
     private Long totalWin;
     private Long totalLose;
     private Long totalKill;

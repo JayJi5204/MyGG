@@ -39,4 +39,6 @@ public class CommController {
         return "/comm/rule";
     }
 
+
+
 }

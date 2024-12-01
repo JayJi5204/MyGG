@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>게시판</title>
+    <title>경기 결과</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/comm.css" rel="stylesheet" type="text/css">
 </head>
@@ -11,24 +11,25 @@
 
 <body>
 <div class="container mt-5">
+    <h2 class="mt-5" th:text="'경기 결과'">경기 결과</h2>
     <table class="table">
         <thead>
         <tr class="tr_td">
             <th>번호</th>
-            <th>제목</th>
+            <th>경기 일자</th>
             <th>작성자</th>
-            <th>작성일</th>
+            <th>최종 수정일</th>
         </tr>
         </thead>
         <tbody>
         <tr class="tr_td" th:each="paging : ${paging}">
             <th th:text="${paging.getId()}">번호</th>
             <td>
-                <a th:href="@{/board/{id}(id=${paging.getId()})}" th:text="${paging.getTitle()}">제목</a>
+                <a th:href="@{/result/{id}(id=${paging.getId()})}" th:text="${paging.getResultDate()}">경기 일자</a>
             </td>
 
             <td th:text="${paging.getWriter()}">작성자</td>
-            <td th:text="${#temporals.format(paging.getRegDay(), 'yyyy-MM-dd')}"></td>
+            <td th:text="${#temporals.format(paging.getModDay(), 'yyyy-MM-dd')}"></td>
         </tr>
         </tbody>
     </table>
@@ -52,16 +53,16 @@
                 </a>
             </li>
             <li class="ml-3">
-                <a class="btn btn-success" role="button" th:href="@{/createBoard}">글 작성</a>
+                <a class="btn btn-success" role="button" th:href="@{/createResult}">글 작성</a>
             </li>
         </ul>
     </nav>
-    <form method="get" th:action="@{/board}">
+    <form method="get" th:action="@{/result}">
         <div class="form-group">
             <label>
                 <select name="option" class="form-control">
-                    <option value="title">글 제목</option>
-                    <option value="content">글 내용</option>
+                    <option value="resultDate">경기 일자</option>
+                    <option value="POG">POG</option>
                 </select>
             </label>
             <label>

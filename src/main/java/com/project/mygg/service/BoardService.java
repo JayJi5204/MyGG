@@ -73,7 +73,7 @@ public class BoardService {
         if (!boardEntity.getWriter().equals(memberEntity.getUsername())) {
             throw new SecurityException("작성자만 게시글을 수정할 수 있습니다.");
         }
-        boardEntity.updateBoard(boardRequestDTO);
+        boardEntity.updateBoard(boardRequestDTO,memberEntity);
         boardRepository.save(boardEntity);
     }
 

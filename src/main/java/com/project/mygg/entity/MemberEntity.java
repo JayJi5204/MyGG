@@ -38,6 +38,9 @@ public class MemberEntity {
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private List<ReplyEntity> replyEntity = new ArrayList<>();
 
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
+    private List<ResultEntity> resultEntity = new ArrayList<>();
+
 
     public MemberEntity(MemberRequestDTO memberRequestDTO, String encodedPassword) {
         this.username = memberRequestDTO.getUsername();

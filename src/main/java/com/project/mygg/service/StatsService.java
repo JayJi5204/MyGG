@@ -1,6 +1,6 @@
 package com.project.mygg.service;
 
-import com.project.mygg.DTO.KdaDTO;
+import com.project.mygg.DTO.TotalKdaDTO;
 import com.project.mygg.DTO.StatDTO;
 import com.project.mygg.DTO.statsDTO.StatsRequestDTO;
 import com.project.mygg.DTO.statsDTO.StatsResponseDTO;
@@ -48,19 +48,11 @@ public class StatsService {
 
         );
 
-
         statsRepository.save(statsEntity);
 
     }
 
-    @Transactional
-    public Page<StatsResponseDTO> searchPlayer(String nickname, int page) {
-        Pageable pageable = PageRequest.of(page, 100, Sort.by(Sort.Direction.ASC, "id"));
-        return statsRepository.findByNicknameContaining(nickname, pageable).map(StatsResponseDTO::new);
-    }
-
-
-    public List<KdaDTO> getTotalKda(Long playerId) {
+    public List<TotalKdaDTO> getTotalKda(Long playerId) {
         return statsRepository.findTotalKdaByPlayer(playerId);
     }
 
@@ -68,11 +60,4 @@ public class StatsService {
         return statsRepository.findStatDTOByPlayerId(playerId);
     }
 
-
-    @Transactional
-    public void addMatch(Long playerId, ChampionName championName, Long kill, Long death, Long assist) {
-        PlayerEntity playerEntity = playerRepository.findById(playerId).orElseThrow();
-        StatsEntity statsEntity = new StatsEntity(playerEntity, championName, kill, death, assist);
-        statsRepository.save(statsEntity);
-    }
 }

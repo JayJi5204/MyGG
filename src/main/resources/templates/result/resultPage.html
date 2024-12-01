@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>게시글</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
+</head>
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
+<body>
+<div class="container">
+    <div th:each="result : ${result}">
+    <h2 class="mt-5" th:text="${resultDate}">경기 일자</h2>
+        <div class="form-group">
+            <label for="resultDate">경기 일자</label>
+            <input class="form-control" disabled id="resultDate"
+                   name="resultDate" th:value="${result.resultDate}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <input class="form-control" disabled id="content"
+                   name="content" th:value="${result.content}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="pog">POG</label>
+            <input class="form-control" disabled id="pog"
+                   name="pog" th:value="${result.pog}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="writer">작성자</label>
+            <input class="form-control" disabled id="writer"
+                   name="writer" th:value="${result.writer}"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <label for="modDay">수정일</label>
+            <input class="form-control" disabled id="modDay"
+                   name="modDay" th:value="${#temporals.format(result.getModDay(), 'yyyy-MM-dd HH-mm')}"
+                   type="text">
+        </div>
+
+
+
+        </div>
+
+
+        <a class="btn btn-warning" role="button" th:href="@{/result}">돌아가기</a>
+        <a class="btn btn-primary" role="button" th:href="@{/updateResult/{id}(id=${result.getId()})}"
+           th:if="${#authentication.principal.username} == ${result.writer}">경기 수정</a>
+        <form method="post"
+              onsubmit="return confirm('삭제하시겠습니까?');" style="display: inline;"
+              th:action="@{/deleteResult/{id}(id=${result.getId()})}"
+              th:if="${#authentication.principal.username} == ${result.writer}">
+            <button class="btn btn-danger" type="submit">경기 삭제</button>
+        </form>
+    </div>
+</div>
+
+</body>
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</html>

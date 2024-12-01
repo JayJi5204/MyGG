@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/comm.css" rel="stylesheet" type="text/css">
+</head>
+<!-- 헤더 위치 -->
+<th:block th:replace="~{/comm/header :: headerFragment}"/>
+<body>
+<div class="container">
+    <h2 class="mt-5">글 작성</h2>
+    <form th:action="@{/createResult}" class="mt-3" method="post" role="form" th:object="${result}">
+        <div class="form-group">
+            <label for="resultDate">경기일자</label>
+            <input class="form-control" id="resultDate" name="resultDate" placeholder="0000년 00월 00일 내전(0)"
+                   th:class="${#fields.hasErrors('resultDate')}? 'form-control fieldError' : 'form-control'"
+                   th:field="*{resultDate}"
+                   type="text">
+            <p th:errors="*{resultDate}" th:if="${#fields.hasErrors('resultDate')}" class="error">오류 메세지</p>
+        </div>
+        <div class="form-group">
+            <label for="content">경기결과</label>
+            <input class="form-control" id="content" name="content" placeholder="제목을 입력하세요"
+                   th:class="${#fields.hasErrors('content')}? 'form-control fieldError' : 'form-control'"
+                   th:field="*{content}"
+                   type="text">
+            <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}" class="error">오류 메세지</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="pog">POG</label>
+            <select id="pog" name="pog"
+                    th:class="${#fields.hasErrors('pog')}? 'form-control fieldError' : 'form-control'" th:field="*{pog}">
+                <option value="">닉네임</option>
+                <option th:each="player : ${player}"
+                        th:text="${player.nickname}"
+                        th:value="${player.nickname}"></option>
+            </select>
+            <p th:errors="*{pog}" th:if="${#fields.hasErrors('pog')}" class="error">오류 메세지</p>
+        </div>
+        <button class="btn btn-primary" type="submit">경기 등록</button>
+        <a class="btn btn-danger" th:href="@{/result}" role="button">취소</a>
+    </form>
+</div>
+</body>
+<th:block th:replace="~{/comm/footer :: footerFragment}"/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>

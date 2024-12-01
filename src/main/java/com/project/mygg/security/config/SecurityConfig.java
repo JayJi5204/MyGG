@@ -34,12 +34,12 @@ public class SecurityConfig {
         // 접근 제어
         http.authorizeHttpRequests((auth) -> auth
                 // permitAll() : 모든 사용자에게 로그인하지 않아도 접근가능
-                .requestMatchers("/css/**", "/js/**", "/img/**", "/", "/home", "/tierList", "/ranking", "/rule", "/board", "/signIn", "/signUp").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/img/**", "/", "/tierList", "/ranking", "/rule", "/board", "/signIn", "/signUp").permitAll()
                 // hasRole() : 특정한 권한이 있어야만 접근 가능
-                .requestMatchers("/memberManage", "/updateMember/**", "/deleteMember/**").hasRole("ADMIN")
-                .requestMatchers("/resultManage", "/addResult", "/updateResult", "/playerManage", "/addPlayer", "/updatePlayer/**", "/deletePlayer/**").hasRole("MANAGER")
+                .requestMatchers("/deleteResult/**", "/deletePlayer/**", "/memberManage", "/updateMember/**", "/deleteMember/**").hasRole("ADMIN")
+                .requestMatchers("/createResult", "/updateResult/**", "/playerManage", "/addPlayer", "/updatePlayer/**").hasRole("MANAGER")
                 // hasAnyRole() : 이 권한이 있으면 접근 가능
-                .requestMatchers("/board/**", "/gameResult/**", "/playerSearch/**").hasRole("MEMBER")
+                .requestMatchers("/board/**", "/updateBoard/**", "/deleteBoard/**", "/result/**", "/playerSearch/**").hasRole("MEMBER")
                 // authenticated() : 로그인만 하면 어디든 가능
                 // denyAll() : 누구도 접근하지 못함
                 .anyRequest().authenticated());
